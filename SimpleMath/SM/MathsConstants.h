@@ -1,7 +1,7 @@
-#ifndef YAMI_MATHS_CONSTANTS_H
-#define YAMI_MATHS_CONSTANTS_H
+#ifndef SM_MATHS_CONSTANTS_H
+#define SM_MATHS_CONSTANTS_H
 
-namespace yami
+namespace sm
 {
 	namespace MathsConstatns
 	{

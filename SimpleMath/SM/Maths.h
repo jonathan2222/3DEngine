@@ -1,5 +1,5 @@
-#ifndef YAMI_MATHS_H
-#define YAMI_MATHS_H
+#ifndef SM_MATHS_H
+#define SM_MATHS_H
 
 #include <cmath>
 
@@ -15,7 +15,7 @@
 
 #include "MathsConstants.h"
 
-namespace yami
+namespace sm
 {
 	class Maths
 	{

@@ -15,63 +15,63 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Matrices\Mat2.cpp">
+    <ClCompile Include="SM\Matrices\Mat2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Matrices\Mat3.cpp">
+    <ClCompile Include="SM\Matrices\Mat3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Matrices\Mat4.cpp">
+    <ClCompile Include="SM\Matrices\Mat4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Quaternion\Quaternion.cpp">
+    <ClCompile Include="SM\Quaternion\Quaternion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vectors\Vec2.cpp">
+    <ClCompile Include="SM\Vectors\Vec2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vectors\Vec3.cpp">
+    <ClCompile Include="SM\Vectors\Vec3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vectors\Vec4.cpp">
+    <ClCompile Include="SM\Vectors\Vec4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Maths.cpp">
+    <ClCompile Include="SM\Maths.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MathsTransform.cpp">
+    <ClCompile Include="SM\MathsTransform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Matrices\Mat2.h">
+    <ClInclude Include="SM\Matrices\Mat2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Matrices\Mat3.h">
+    <ClInclude Include="SM\Matrices\Mat3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Matrices\Mat4.h">
+    <ClInclude Include="SM\Matrices\Mat4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Quaternion\Quaternion.h">
+    <ClInclude Include="SM\Quaternion\Quaternion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vectors\Vec2.h">
+    <ClInclude Include="SM\Vectors\Vec2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vectors\Vec3.h">
+    <ClInclude Include="SM\Vectors\Vec3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vectors\Vec4.h">
+    <ClInclude Include="SM\Vectors\Vec4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Maths.h">
+    <ClInclude Include="SM\Maths.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MathsConstants.h">
+    <ClInclude Include="SM\MathsConstants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MathsTransform.h">
+    <ClInclude Include="SM\MathsTransform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

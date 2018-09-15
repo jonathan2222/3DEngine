@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3DEngine", "3DEngine\3DEngine.vcxproj", "{C54AA599-F56F-49C1-AF8E-A5090E4C350A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{20D561E0-7C18-4B61-AE9E-DBFBE410D663} = {20D561E0-7C18-4B61-AE9E-DBFBE410D663}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleMath", "SimpleMath\SimpleMath.vcxproj", "{20D561E0-7C18-4B61-AE9E-DBFBE410D663}"
 EndProject

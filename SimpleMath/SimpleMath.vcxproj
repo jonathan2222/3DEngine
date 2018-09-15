@@ -26,13 +26,13 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -115,27 +115,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Maths.cpp" />
-    <ClCompile Include="MathsTransform.cpp" />
-    <ClCompile Include="Matrices\Mat2.cpp" />
-    <ClCompile Include="Matrices\Mat3.cpp" />
-    <ClCompile Include="Matrices\Mat4.cpp" />
-    <ClCompile Include="Quaternion\Quaternion.cpp" />
-    <ClCompile Include="Vectors\Vec2.cpp" />
-    <ClCompile Include="Vectors\Vec3.cpp" />
-    <ClCompile Include="Vectors\Vec4.cpp" />
+    <ClCompile Include="SM\Maths.cpp" />
+    <ClCompile Include="SM\MathsTransform.cpp" />
+    <ClCompile Include="SM\Matrices\Mat2.cpp" />
+    <ClCompile Include="SM\Matrices\Mat3.cpp" />
+    <ClCompile Include="SM\Matrices\Mat4.cpp" />
+    <ClCompile Include="SM\Quaternion\Quaternion.cpp" />
+    <ClCompile Include="SM\Vectors\Vec2.cpp" />
+    <ClCompile Include="SM\Vectors\Vec3.cpp" />
+    <ClCompile Include="SM\Vectors\Vec4.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Maths.h" />
-    <ClInclude Include="MathsConstants.h" />
-    <ClInclude Include="MathsTransform.h" />
-    <ClInclude Include="Matrices\Mat2.h" />
-    <ClInclude Include="Matrices\Mat3.h" />
-    <ClInclude Include="Matrices\Mat4.h" />
-    <ClInclude Include="Quaternion\Quaternion.h" />
-    <ClInclude Include="Vectors\Vec2.h" />
-    <ClInclude Include="Vectors\Vec3.h" />
-    <ClInclude Include="Vectors\Vec4.h" />
+    <ClInclude Include="SM\Maths.h" />
+    <ClInclude Include="SM\MathsConstants.h" />
+    <ClInclude Include="SM\MathsTransform.h" />
+    <ClInclude Include="SM\Matrices\Mat2.h" />
+    <ClInclude Include="SM\Matrices\Mat3.h" />
+    <ClInclude Include="SM\Matrices\Mat4.h" />
+    <ClInclude Include="SM\Quaternion\Quaternion.h" />
+    <ClInclude Include="SM\Vectors\Vec2.h" />
+    <ClInclude Include="SM\Vectors\Vec3.h" />
+    <ClInclude Include="SM\Vectors\Vec4.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

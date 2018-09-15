@@ -1,12 +1,12 @@
 #include "MathsTransform.h"
 
-yami::Mat4 yami::MathsTransform::perspective(float fov, float aspectRatio, float zNear, float zFar)
+sm::Mat4 sm::MathsTransform::perspective(float fov, float aspectRatio, float zNear, float zFar)
 {
 	Mat4 m;
 	return perspective(m, fov, aspectRatio, zNear, zFar);
 }
 
-yami::Mat4& yami::MathsTransform::perspective(Mat4 & m, float fov, float aspectRatio, float zNear, float zFar)
+sm::Mat4& sm::MathsTransform::perspective(Mat4 & m, float fov, float aspectRatio, float zNear, float zFar)
 {
 	const float tanHalfFOV = (float)tan(fov / 2.0f);
 	const float zRange = zFar - zNear;
@@ -18,13 +18,13 @@ yami::Mat4& yami::MathsTransform::perspective(Mat4 & m, float fov, float aspectR
 	return m;
 }
 
-yami::Mat4 yami::MathsTransform::orthographic(float left, float right, float top, float bottom, float zNear, float zFar)
+sm::Mat4 sm::MathsTransform::orthographic(float left, float right, float top, float bottom, float zNear, float zFar)
 {
 	Mat4 m;
 	return orthographic(m, left, right, top, bottom, zNear, zFar);
 }
 
-yami::Mat4& yami::MathsTransform::orthographic(Mat4 & m, float left, float right, float top, float bottom, float zNear, float zFar)
+sm::Mat4& sm::MathsTransform::orthographic(Mat4 & m, float left, float right, float top, float bottom, float zNear, float zFar)
 {
 	const float zRange = zFar - zNear;
 	m[0][0] = 2.0f / (right - left);	m[1][0] = 0;						m[2][0] = 0;				m[3][0] = -(right + left) / (right - left);
@@ -34,13 +34,13 @@ yami::Mat4& yami::MathsTransform::orthographic(Mat4 & m, float left, float right
 	return m;
 }
 
-yami::Mat4 yami::MathsTransform::initCamera(const Vec3 & direction, const Vec3 & worldUp, const Vec3& position)
+sm::Mat4 sm::MathsTransform::initCamera(const Vec3 & direction, const Vec3 & worldUp, const Vec3& position)
 {
 	Mat4 m;
 	return initCamera(m, direction, worldUp, position);
 }
 
-yami::Mat4& yami::MathsTransform::initCamera(Mat4 & m, const Vec3 & direction, const Vec3 & worldUp, const Vec3& position)
+sm::Mat4& sm::MathsTransform::initCamera(Mat4 & m, const Vec3 & direction, const Vec3 & worldUp, const Vec3& position)
 {
 	Vec3 right = worldUp;
 	right = Maths::normalize(Maths::cross(direction, right));
@@ -48,13 +48,13 @@ yami::Mat4& yami::MathsTransform::initCamera(Mat4 & m, const Vec3 & direction, c
 	return initCamera(m, right, up, direction, position);
 }
 
-yami::Mat4 yami::MathsTransform::initCamera(const Vec3 & right, const Vec3 & up, const Vec3 & forward, const Vec3& position)
+sm::Mat4 sm::MathsTransform::initCamera(const Vec3 & right, const Vec3 & up, const Vec3 & forward, const Vec3& position)
 {
 	Mat4 m;
 	return initCamera(m, right, up, forward, position);
 }
 
-yami::Mat4& yami::MathsTransform::initCamera(Mat4& m, const Vec3 & right, const Vec3 & up, const Vec3 & forward, const Vec3& position)
+sm::Mat4& sm::MathsTransform::initCamera(Mat4& m, const Vec3 & right, const Vec3 & up, const Vec3 & forward, const Vec3& position)
 {
 	m[0][0] = right.x;		m[1][0] = right.y;		m[2][0] = right.z;		m[3][0] = -Maths::dot(position, right);
 	m[0][1] = up.x;			m[1][1] = up.y;			m[2][1] = up.z;			m[3][1] = -Maths::dot(position, up);
@@ -64,7 +64,7 @@ yami::Mat4& yami::MathsTransform::initCamera(Mat4& m, const Vec3 & right, const 
 	return m;
 }
 
-yami::Vec3 yami::MathsTransform::rotate(const Vec3 & v, float angle, const Vec3 & axis)
+sm::Vec3 sm::MathsTransform::rotate(const Vec3 & v, float angle, const Vec3 & axis)
 {
 	Vec3 vPAxis = Maths::project<Vec3>(v, axis);
 	Vec3 vOAxis = v - vPAxis;
@@ -74,33 +74,33 @@ yami::Vec3 yami::MathsTransform::rotate(const Vec3 & v, float angle, const Vec3 
 	return vOr + vPAxis;
 }
 
-yami::Vec3 yami::MathsTransform::rotate(const Vec3 & v, float x, float y, float z)
+sm::Vec3 sm::MathsTransform::rotate(const Vec3 & v, float x, float y, float z)
 {
 	return Vec3(rotationMat(x, y, z) * v);
 }
 
-yami::Mat3 yami::MathsTransform::rotate(const Mat3 & m, float x, float y, float z)
+sm::Mat3 sm::MathsTransform::rotate(const Mat3 & m, float x, float y, float z)
 {
 	return Mat3(rotationMat(x, y, z) * Mat4(m));
 }
 
-yami::Vec4 yami::MathsTransform::rotate(const Vec4& v, float angle, const Vec3& axis)
+sm::Vec4 sm::MathsTransform::rotate(const Vec4& v, float angle, const Vec3& axis)
 {
 	Vec3 result = rotate(Vec3(v), angle, axis);
 	return Vec3(result, v.w);
 }
 
-yami::Vec4 yami::MathsTransform::rotate(const Vec4& v, float x, float y, float z)
+sm::Vec4 sm::MathsTransform::rotate(const Vec4& v, float x, float y, float z)
 {
 	return rotationMat(x, y, z) * v;
 }
 
-yami::Mat4 yami::MathsTransform::rotate(const Mat4& m, float x, float y, float z)
+sm::Mat4 sm::MathsTransform::rotate(const Mat4& m, float x, float y, float z)
 {
 	return rotationMat(x, y, z) * m;
 }
 
-yami::Mat4 yami::MathsTransform::rotationMat(float x, float y, float z)
+sm::Mat4 sm::MathsTransform::rotationMat(float x, float y, float z)
 {
 	float sinX = (float)sin(x);
 	float cosX = (float)cos(x);
@@ -129,24 +129,24 @@ yami::Mat4 yami::MathsTransform::rotationMat(float x, float y, float z)
 	return m;
 }
 
-yami::Mat4 yami::MathsTransform::lookAt(const Vec3 & target, const Vec3& position)
+sm::Mat4 sm::MathsTransform::lookAt(const Vec3 & target, const Vec3& position)
 {
 	Mat4 m;
 	return lookAt(m, target, position);
 }
 
-yami::Mat4 & yami::MathsTransform::lookAt(Mat4 & m, const Vec3 & target, const Vec3& position)
+sm::Mat4 & sm::MathsTransform::lookAt(Mat4 & m, const Vec3 & target, const Vec3& position)
 {
 	return lookIn(m, Maths::normalize(target - position));
 }
 
-yami::Mat4 yami::MathsTransform::lookIn(const Vec3 & direction)
+sm::Mat4 sm::MathsTransform::lookIn(const Vec3 & direction)
 {
 	Mat4 m;
 	return lookIn(m, direction);
 }
 
-yami::Mat4 & yami::MathsTransform::lookIn(Mat4 & m, const Vec3 & direction)
+sm::Mat4 & sm::MathsTransform::lookIn(Mat4 & m, const Vec3 & direction)
 {
 	Vec3 right = Vec3(0.0f, 1.0f, 0.0f);
 	right = Maths::normalize(Maths::cross(direction, right));
@@ -158,13 +158,13 @@ yami::Mat4 & yami::MathsTransform::lookIn(Mat4 & m, const Vec3 & direction)
 	return m;
 }
 
-yami::Mat4 yami::MathsTransform::scale(float x, float y, float z)
+sm::Mat4 sm::MathsTransform::scale(float x, float y, float z)
 {
 	Mat4 m(1.0f);
 	return scale(m, x, y, z);
 }
 
-yami::Mat4 & yami::MathsTransform::scale(Mat4 & m, float x, float y, float z)
+sm::Mat4 & sm::MathsTransform::scale(Mat4 & m, float x, float y, float z)
 {
 	m[0][0] = x;
 	m[1][1] = y;
@@ -172,13 +172,13 @@ yami::Mat4 & yami::MathsTransform::scale(Mat4 & m, float x, float y, float z)
 	return m;
 }
 
-yami::Mat4 yami::MathsTransform::translate(float x, float y, float z)
+sm::Mat4 sm::MathsTransform::translate(float x, float y, float z)
 {
 	Mat4 m(1.0f);
 	return translate(m, x, y, z);
 }
 
-yami::Mat4 & yami::MathsTransform::translate(Mat4 & m, float x, float y, float z)
+sm::Mat4 & sm::MathsTransform::translate(Mat4 & m, float x, float y, float z)
 {
 	m[3][0] = x;
 	m[3][1] = y;
@@ -186,7 +186,7 @@ yami::Mat4 & yami::MathsTransform::translate(Mat4 & m, float x, float y, float z
 	return m;
 }
 
-yami::Mat4 yami::MathsTransform::getTranslationMat(const Mat4 & m)
+sm::Mat4 sm::MathsTransform::getTranslationMat(const Mat4 & m)
 {
 	return translate(m[3][0], m[3][1], m[3][2]);
 }

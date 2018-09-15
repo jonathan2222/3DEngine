@@ -5,7 +5,7 @@
 #include "../Vectors/Vec4.h"
 #include "../Matrices/Mat3.h"
 
-namespace yami
+namespace sm
 {
 	class Quaternion
 	{

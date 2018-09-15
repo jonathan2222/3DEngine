@@ -1,7 +1,7 @@
-#ifndef YAMI_VECTOR_2_H
-#define YAMI_VECTOR_2_H
+#ifndef SM_VECTOR_2_H
+#define SM_VECTOR_2_H
 
-namespace yami
+namespace sm
 {
 	class Vec3;
 	class Vec4;
@@ -68,8 +68,8 @@ namespace yami
 	};
 }
 
-inline yami::Vec2 operator+(float scalar, const yami::Vec2& v) { return v + scalar; }
-inline yami::Vec2 operator-(float scalar, const yami::Vec2& v) { return v - scalar; }
-inline yami::Vec2 operator*(float scalar, const yami::Vec2& v) { return v * scalar; }
+inline sm::Vec2 operator+(float scalar, const sm::Vec2& v) { return v + scalar; }
+inline sm::Vec2 operator-(float scalar, const sm::Vec2& v) { return v - scalar; }
+inline sm::Vec2 operator*(float scalar, const sm::Vec2& v) { return v * scalar; }
 
 #endif

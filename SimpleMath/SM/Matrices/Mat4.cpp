@@ -3,7 +3,7 @@
 #include "Mat3.h"
 #include "Mat2.h"
 
-yami::Mat4::Mat4()
+sm::Mat4::Mat4()
 {
 	this->col[0].x = 1.0f;	this->col[1].x = 0.0f;	this->col[2].x = 0.0f;	this->col[3].x = 0.0f;
 	this->col[0].y = 0.0f;	this->col[1].y = 1.0f;	this->col[2].y = 0.0f;	this->col[3].y = 0.0f;
@@ -11,7 +11,7 @@ yami::Mat4::Mat4()
 	this->col[0].w = 0.0f;	this->col[1].w = 0.0f;	this->col[2].w = 0.0f;	this->col[3].w = 1.0f;
 }
 
-yami::Mat4::Mat4(float value)
+sm::Mat4::Mat4(float value)
 {
 	this->col[0].x = value;	this->col[1].x = 0.0f;	this->col[2].x = 0.0f;	this->col[3].x = 0.0f;
 	this->col[0].y = 0.0f;	this->col[1].y = value;	this->col[2].y = 0.0f;	this->col[3].y = 0.0f;
@@ -19,7 +19,7 @@ yami::Mat4::Mat4(float value)
 	this->col[0].w = 0.0f;	this->col[1].w = 0.0f;	this->col[2].w = 0.0f;	this->col[3].w = value;
 }
 
-yami::Mat4::Mat4(const Vec4 & col1, const Vec4 & col2, const Vec4 & col3, const Vec4 & col4)
+sm::Mat4::Mat4(const Vec4 & col1, const Vec4 & col2, const Vec4 & col3, const Vec4 & col4)
 {
 	this->col[0] = col1;
 	this->col[1] = col2;
@@ -27,7 +27,7 @@ yami::Mat4::Mat4(const Vec4 & col1, const Vec4 & col2, const Vec4 & col3, const 
 	this->col[3] = col4;
 }
 
-yami::Mat4::Mat4(float e11, float e12, float e13, float e14, 
+sm::Mat4::Mat4(float e11, float e12, float e13, float e14, 
 				float e21, float e22, float e23, float e24, 
 				float e31, float e32, float e33, float e34, 
 				float e41, float e42, float e43, float e44)
@@ -38,12 +38,12 @@ yami::Mat4::Mat4(float e11, float e12, float e13, float e14,
 	this->col[0].w = e41;	this->col[1].w = e42;	this->col[2].w = e43;	this->col[3].w = e44;
 }
 
-yami::Mat4::Mat4(const Mat4 & m)
+sm::Mat4::Mat4(const Mat4 & m)
 {
 	copy(m);
 }
 
-yami::Mat4::Mat4(const Mat3 & m)
+sm::Mat4::Mat4(const Mat3 & m)
 {
 	this->col[0].x = m[0].x;	this->col[1].x = m[1].x;	this->col[2].x = m[2].x;	this->col[3].x = 0.0f;
 	this->col[0].y = m[0].y;	this->col[1].y = m[1].y;	this->col[2].y = m[2].y;	this->col[3].y = 0.0f;
@@ -51,7 +51,7 @@ yami::Mat4::Mat4(const Mat3 & m)
 	this->col[0].w = 0.0f;		this->col[1].w = 0.0f;		this->col[2].w = 0.0f;		this->col[3].w = 1.0f;
 }
 
-yami::Mat4::Mat4(const Mat2 & m)
+sm::Mat4::Mat4(const Mat2 & m)
 {
 	this->col[0].x = m[0].x;	this->col[1].x = m[1].x;	this->col[2].x = 0.0f;		this->col[3].x = 0.0f;
 	this->col[0].y = m[0].y;	this->col[1].y = m[1].y;	this->col[2].y = 0.0f;		this->col[3].y = 0.0f;
@@ -59,42 +59,42 @@ yami::Mat4::Mat4(const Mat2 & m)
 	this->col[0].w = 0.0f;		this->col[1].w = 0.0f;		this->col[2].w = 0.0f;		this->col[3].w = 1.0f;
 }
 
-yami::Vec4 & yami::Mat4::operator[](size_t i)
+sm::Vec4 & sm::Mat4::operator[](size_t i)
 {
 	return getColumn(i);
 }
 
-const yami::Vec4 & yami::Mat4::operator[](size_t i) const
+const sm::Vec4 & sm::Mat4::operator[](size_t i) const
 {
 	return getColumn(i);
 }
 
-yami::Vec4 yami::Mat4::getRow(size_t i) const
+sm::Vec4 sm::Mat4::getRow(size_t i) const
 {
 	return Vec4(this->col[0][i], this->col[1][i], this->col[2][i], this->col[3][i]);
 }
 
-yami::Vec4 & yami::Mat4::getColumn(size_t i)
+sm::Vec4 & sm::Mat4::getColumn(size_t i)
 {
 	return this->col[i];
 }
 
-const yami::Vec4 & yami::Mat4::getColumn(size_t i) const
+const sm::Vec4 & sm::Mat4::getColumn(size_t i) const
 {
 	return this->col[i];
 }
 
-yami::Mat4 & yami::Mat4::operator=(const Mat4 & m)
+sm::Mat4 & sm::Mat4::operator=(const Mat4 & m)
 {
 	return copy(m);
 }
 
-yami::Mat4 & yami::Mat4::operator*=(const Mat4 & m)
+sm::Mat4 & sm::Mat4::operator*=(const Mat4 & m)
 {
 	return copy(*this * m);
 }
 
-yami::Mat4 & yami::Mat4::operator*=(float scalar)
+sm::Mat4 & sm::Mat4::operator*=(float scalar)
 {
 	for (size_t c = 0; c < 4; c++)
 		for (size_t r = 0; r < 4; r++)
@@ -102,7 +102,7 @@ yami::Mat4 & yami::Mat4::operator*=(float scalar)
 	return *this;
 }
 
-yami::Mat4 yami::Mat4::operator*(const Mat4 & m) const
+sm::Mat4 sm::Mat4::operator*(const Mat4 & m) const
 {
 	Mat4 ret;
 	for (size_t r = 0; r < 4; r++)
@@ -111,7 +111,7 @@ yami::Mat4 yami::Mat4::operator*(const Mat4 & m) const
 	return ret;
 }
 
-yami::Vec4 yami::Mat4::operator*(const Vec4 & v) const
+sm::Vec4 sm::Mat4::operator*(const Vec4 & v) const
 {
 	Vec4 ret;
 	for (size_t r = 0; r < 4; r++)
@@ -119,18 +119,18 @@ yami::Vec4 yami::Mat4::operator*(const Vec4 & v) const
 	return ret;
 }
 
-yami::Mat4 yami::Mat4::operator*(float scalar) const
+sm::Mat4 sm::Mat4::operator*(float scalar) const
 {
 	Mat4 m(*this);
 	return m *= scalar;
 }
 
-int yami::Mat4::getSideLength() const
+int sm::Mat4::getSideLength() const
 {
 	return 4;
 }
 
-yami::Mat4 & yami::Mat4::copy(const Mat4 & m)
+sm::Mat4 & sm::Mat4::copy(const Mat4 & m)
 {
 	for (size_t c = 0; c < 4; c++)
 		this->col[c] = m[c];

@@ -1,9 +1,9 @@
-#ifndef YAMI_MATHS_TRANSFORM_H
-#define YAMI_MATHS_TRANSFORM_H
+#ifndef SM_MATHS_TRANSFORM_H
+#define SM_MATHS_TRANSFORM_H
 
 #include "Maths.h"
 
-namespace yami
+namespace sm
 {
 	class MathsTransform
 	{

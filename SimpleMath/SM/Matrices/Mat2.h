@@ -1,9 +1,9 @@
-#ifndef YAMI_MATRIX_2_H
-#define YAMI_MATRIX_2_H
+#ifndef SM_MATRIX_2_H
+#define SM_MATRIX_2_H
 
 #include "../Vectors/Vec2.h"
 
-namespace yami
+namespace sm
 {
 	class Mat3;
 	class Mat4;
