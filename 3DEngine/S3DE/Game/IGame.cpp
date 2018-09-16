@@ -5,6 +5,7 @@
 
 #include "../Graphics/Objects/Model.h"
 #include "../Utils/ModelLoader.h"
+#include "../Utils/ModelGenerator.h"
 #include "../Graphics/Rendering/Renderer.h"
 #include "../Graphics/Shaders/Shader.h"
 
@@ -38,6 +39,8 @@ void s3de::IGame::init()
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 
+	s3de::Model* sphere = s3de::ModelGenerator::generateSphere();
+
 	s3de::Model* barrel = s3de::ModelLoader::loadModel("./../3DEngine/S3DE/Resources/Models/Barrel.fbx");
 
 	s3de::FPSCamera camera(sm::Vec3(0.0f, 0.0f, -1.0f), sm::Vec3(0.0f, 0.0f, 5.0f), display->getAspectRatio());
@@ -48,6 +51,8 @@ void s3de::IGame::init()
 	s3de::Shader shader = renderer.getShader();
 
 	this->OnInitiate();
+
+	sm::Mat4 world = sm::MathsTransform::translate(0.0f, 0.5f, -2.0f);
 
 	s3de::Timer timer;
 	float fpsDisplayTimer = 1.0f;
@@ -90,14 +95,18 @@ void s3de::IGame::init()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		renderer.resetMaterial(); // Use default material
+		
+		sm::Quaternion baseRotation2(timer.getDeltaTime(), sm::Vec3(0.0f, 1.0f, 0.0f));
+		world = baseRotation2.getMatrix4() * world;
 
-		sm::Mat4 w(1.0f);
-		w[3][3] = 1.0f;
+		shader.bind();
+		shader.setUniform3fv("camPos", 1, &(camera.getPosition())[0]);
+		shader.setUniformMatrix4fv("world", 1, false, &(world)[0][0]);
+		shader.setUniformMatrix4fv("vp", 1, false, &(camera.getVP())[0][0]);
+		renderer.render(sphere);
+
 		sm::Quaternion baseRotation(-sm::MathsConstatns::PI / 2.0f, sm::Vec3(1.0f, 0.0f, 0.0f));
-		//w = yami::MathsTransform::scale(w, 10.0f, 10.0f, 10.0f);
-		w = w * baseRotation.getMatrix3();
-		//w = yami::MathsTransform::rotate(w, -yami::MathsConstatns::PI / 2.0f, 0.0f, 0.0f);
-		w = sm::MathsTransform::translate(w, 2.0f, 0.0f, 0.0f);
+		sm::Mat4 w = baseRotation.getMatrix4();
 		shader.bind();
 		shader.setUniform3fv("camPos", 1, &(camera.getPosition())[0]);
 		shader.setUniformMatrix4fv("world", 1, false, &(w)[0][0]);
@@ -115,5 +124,6 @@ void s3de::IGame::init()
 		glfwSwapBuffers(display->getWindowPtr());
 		glfwPollEvents();
 	}
+	delete sphere;
 	delete barrel;
 }

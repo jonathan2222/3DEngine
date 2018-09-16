@@ -122,7 +122,7 @@ namespace s3de
 			return new Model(meshes);
 		}
 
-		static Model* generateSphere(float radius = 0.5f, unsigned int resolution = 1)
+		static Model* generateSphere(float radius = 0.5f, unsigned int resolution = 10)
 		{
 			Model* model = generateBox(0.5f, resolution);
 			Mesh* mesh = model->getMeshes()[0];
