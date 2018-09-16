@@ -1,0 +1,9 @@
+#ifndef S3DE_INPUT_CONFIG_H
+#define S3DE_INPUT_CONFIG_H
+
+#define S3DE_KEY_PRESS		2
+#define S3DE_KEY_RELEASE	4
+#define S3DE_KEY_CLICK		8
+#define S3DE_KEY_TOGGLE		16
+
+#endif

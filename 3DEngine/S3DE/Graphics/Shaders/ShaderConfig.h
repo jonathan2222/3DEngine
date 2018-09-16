@@ -1,0 +1,7 @@
+#ifndef S3DE_SHADER_CONFIG_H
+#define S3DE_SHADER_CONFIG_H
+
+#define VERTEX_SHADER	1
+#define FRAGMENT_SHADER 2
+
+#endif
