@@ -2,7 +2,7 @@
 
 s3de::Renderer::Renderer()
 {
-	this->shader = new Shader("./Resources/Shaders/testShader");
+	this->shader = new Shader("./../3DEngine/S3DE/Resources/Shaders/testShader");
 	this->shader->bind();
 	this->ubo = new UniformBuffer("Material", shader->getID(), 1);
 	s3de::Material::MaterialData tempMatData;
