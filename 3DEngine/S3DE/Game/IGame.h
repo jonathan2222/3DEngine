@@ -12,8 +12,8 @@ namespace s3de
 		IGame(const std::string& title, unsigned int width, unsigned int height);
 		virtual ~IGame();
 
-		virtual void OnInitiate() {};
-		virtual void OnFrameUpdate() {};
+		virtual void OnInitiate() {}
+		virtual void OnFrameUpdate() {}
 
 	private:
 		void init();

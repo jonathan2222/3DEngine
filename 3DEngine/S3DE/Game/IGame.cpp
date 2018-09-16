@@ -27,7 +27,7 @@ void s3de::IGame::init()
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 
-	OnInitiate();
+	this->OnInitiate();
 
 	s3de::Timer timer;
 	float fpsDisplayTimer = 1.0f;
@@ -44,7 +44,7 @@ void s3de::IGame::init()
 		}
 
 		// ----------------- Update -----------------
-		OnFrameUpdate();
+		this->OnFrameUpdate();
 
 		// ----------------- Render -----------------
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
