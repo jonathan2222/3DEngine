@@ -63,6 +63,12 @@
     <ClCompile Include="S3DE\Game\IGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="S3DE\Game\ECS\Component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="S3DE\Game\ECS\Ecs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="S3DE\Graphics\GUI\Display.h">
@@ -141,6 +147,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="S3DE\Game\IGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="S3DE\Utils\BitManipulation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="S3DE\Game\ECS\Ecs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="S3DE\Game\ECS\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

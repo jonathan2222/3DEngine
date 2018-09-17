@@ -16,10 +16,8 @@ Game::~Game()
 
 void Game::OnInitiate()
 {
-	s3de::Error::print("[GAME] Initiate");
 }
 
 void Game::OnFrameUpdate()
 {
-	s3de::Error::print("[GAME] Update frame");
 }
