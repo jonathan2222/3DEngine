@@ -12,11 +12,14 @@ namespace s3de
 		IGame(const std::string& title, unsigned int width, unsigned int height);
 		virtual ~IGame();
 
+		void run();
+
 		virtual void OnInitiate() {}
 		virtual void OnFrameUpdate() {}
 
 	private:
 		void init();
+		void loop();
 
 		Display * display;
 	};

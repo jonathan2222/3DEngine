@@ -32,13 +32,22 @@ s3de::IGame::~IGame()
 	delete this->display;
 }
 
+void s3de::IGame::run()
+{
+	this->OnInitiate();
+	loop();
+}
+
 void s3de::IGame::init()
 {
 	s3de::Error::init();
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
+}
 
+void s3de::IGame::loop()
+{
 	s3de::Model* sphere = s3de::ModelGenerator::generateSphere();
 
 	s3de::Model* barrel = s3de::ModelLoader::loadModel("./../3DEngine/S3DE/Resources/Models/Barrel.fbx");
@@ -49,8 +58,6 @@ void s3de::IGame::init()
 	s3de::Renderer renderer;
 	renderer.setWireframe(false);
 	s3de::Shader shader = renderer.getShader();
-
-	this->OnInitiate();
 
 	sm::Mat4 world = sm::MathsTransform::translate(0.0f, 0.5f, -2.0f);
 
@@ -95,7 +102,7 @@ void s3de::IGame::init()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		renderer.resetMaterial(); // Use default material
-		
+
 		sm::Quaternion baseRotation2(timer.getDeltaTime(), sm::Vec3(0.0f, 1.0f, 0.0f));
 		world = baseRotation2.getMatrix4() * world;
 
