@@ -2,31 +2,39 @@
 #define S3DE_COMPONENT_H
 
 #include <vector>
+#include <tuple>
+
+#include "EcsDefines.h"
 
 namespace s3de
 {
 	struct BaseComponent;
-	typedef unsigned int(*CreateComponentFunction)(std::vector<unsigned char>& memory, void* entity, BaseComponent* comp);
+	typedef ComponentIndex(*CreateComponentFunction)(std::vector<Byte>& memory, EntityHandle entity, BaseComponent* comp);
 	typedef void(*FreeComponentFunction)(BaseComponent* comp);
 
 	struct BaseComponent
 	{
-		static unsigned int registerComponent(CreateComponentFunction createFunction, FreeComponentFunction freeFunction);
+		static unsigned int registerComponent(CreateComponentFunction createFunction, FreeComponentFunction freeFunction, unsigned int);
 
-		void* entityPtr = nullptr;
+		EntityHandle entityHandle = nullptr;
 
 		static CreateComponentFunction getCreateFunction(unsigned int id)
 		{
-			return (*componentTypes)[id].first;
+			return std::get<0>((*componentTypes)[id]);
 		}
 
 		static FreeComponentFunction getFreeFunction(unsigned int id)
 		{
-			return (*componentTypes)[id].second;
+			return std::get<1>((*componentTypes)[id]);
+		}
+
+		static unsigned int getSize(unsigned int id)
+		{
+			return std::get<2>((*componentTypes)[id]);
 		}
 
 	private:
-		static std::vector<std::pair<CreateComponentFunction, FreeComponentFunction>>* componentTypes;
+		static std::vector<std::tuple<CreateComponentFunction, FreeComponentFunction, unsigned int>>* componentTypes;
 	};
 
 	template<typename T>
@@ -35,13 +43,13 @@ namespace s3de
 		static CreateComponentFunction CREATE_FUNCTION;
 		static FreeComponentFunction FREE_FUNCTION;
 		static unsigned int SIZE;
-		static unsigned int ID;
+		static ComponentID ID;
 	};
 
 	template<typename T>
-	unsigned int createComponent(std::vector<unsigned char>& memory, void* entity, BaseComponent* comp)
+	ComponentIndex createComponent(std::vector<unsigned char>& memory, void* entity, BaseComponent* comp)
 	{
-		unsigned int index = memory.size();
+		ComponentIndex index = memory.size();
 		memory.resize(index + T::SIZE);
 		// Allocate memory in 'memory' at position 'index' and fill it with data from comp. 
 		T* component = new(&memory[index])T(*(T*)comp);
@@ -66,7 +74,7 @@ namespace s3de
 	unsigned int Component<T>::SIZE(sizeof(T));
 
 	template<typename T>
-	unsigned int Component<T>::ID(registerComponent(Component<T>::CREATE_FUNCTION, Component<T>::FREE_FUNCTION));
+	ComponentID Component<T>::ID(registerComponent(Component<T>::CREATE_FUNCTION, Component<T>::FREE_FUNCTION, sizeof(T)));
 }
 
 #endif

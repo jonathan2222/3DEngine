@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClInclude Include="S3DE\Game\ECS\Component.h" />
     <ClInclude Include="S3DE\Game\ECS\Ecs.h" />
+    <ClInclude Include="S3DE\Game\ECS\EcsDefines.h" />
     <ClInclude Include="S3DE\Game\IGame.h" />
     <ClInclude Include="S3DE\Graphics\GUI\Display.h" />
     <ClInclude Include="S3DE\Graphics\GUI\WindowConfig.h" />
