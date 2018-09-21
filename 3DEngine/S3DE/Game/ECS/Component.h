@@ -8,15 +8,16 @@
 
 namespace s3de
 {
+	struct Entity;
 	struct BaseComponent;
-	typedef ComponentIndex(*CreateComponentFunction)(std::vector<Byte>& memory, EntityHandle entity, BaseComponent* comp);
+	typedef ComponentIndex(*CreateComponentFunction)(std::vector<Byte>& memory, Entity* entity, BaseComponent* comp);
 	typedef void(*FreeComponentFunction)(BaseComponent* comp);
 
 	struct BaseComponent
 	{
-		static unsigned int registerComponent(CreateComponentFunction createFunction, FreeComponentFunction freeFunction, unsigned int);
+		Entity* entity = nullptr;
 
-		EntityHandle entityHandle = nullptr;
+		static unsigned int registerComponent(CreateComponentFunction createFunction, FreeComponentFunction freeFunction, unsigned int);
 
 		static CreateComponentFunction getCreateFunction(unsigned int id)
 		{
@@ -47,7 +48,7 @@ namespace s3de
 	};
 
 	template<typename T>
-	ComponentIndex createComponent(std::vector<unsigned char>& memory, void* entity, BaseComponent* comp)
+	ComponentIndex createComponent(std::vector<unsigned char>& memory, Entity* entity, BaseComponent* comp)
 	{
 		ComponentIndex index = memory.size();
 		memory.resize(index + T::SIZE);

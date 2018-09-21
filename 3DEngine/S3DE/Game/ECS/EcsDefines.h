@@ -5,6 +5,5 @@
 #define ComponentIndex unsigned int
 #define EntityID unsigned int
 #define Byte unsigned char
-#define EntityHandle void*
 
 #endif

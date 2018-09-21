@@ -6,60 +6,37 @@ s3de::Ecs::Ecs()
 
 s3de::Ecs::~Ecs()
 {
+	unsigned int numEntites = this->entities.size();
+	for (unsigned int i = numEntites-1; i > 0; i--)
+		removeEntity(this->entities[i]);
 }
 
-EntityHandle s3de::Ecs::makeEntity(const std::vector<BaseComponent*>& components)
+s3de::Entity* s3de::Ecs::makeEntity(const std::vector<BaseComponent*>& components)
 {
-	std::pair<EntityID, Entity> data;
-	data.first = this->entities.size();
-	data.second.ecs = this;
+	Entity* entity = new Entity();
+	entity->id = this->entities.size();
 
 	for (unsigned int i = 0; i < components.size(); i++)
-		data.second.addComponent(components[i]);
+		entity->addComponent(components[i], this->componentsMemory);
 
-	this->entities.push_back(data);
-	return &this->entities[data.first].second;
+	this->entities.push_back(entity);
+	return entity;
 }
 
-void s3de::Ecs::removeEntity(EntityHandle handle)
+void s3de::Ecs::removeEntity(s3de::Entity* entity)
 {
-	Entity* entity = (Entity*)handle;
 	std::vector<std::pair<ComponentID, ComponentIndex>>& components = entity->components;
 
 	for (unsigned int i = 0; i < components.size(); i++)
+		entity->deleteComponent(components[i].first, components[i].second, this->componentsMemory);
+
+	// Delete the entity and replace it with the last.
+	EntityID id = entity->id;
+	delete entity;
+	if (id != this->entities.size() - 1)
 	{
-		entity->deleteComponent(i, components[i].first, components[i].second);
-	}
-
-	// TOOD: remove entity.
-}
-
-void s3de::Ecs::Entity::deleteComponent(EntityID entityId, ComponentID componentId, ComponentIndex componentIndex)
-{
-	std::vector<Byte>& memory = this->ecs->componentsMemory[componentId];
-	unsigned int typeSize = BaseComponent::getSize(componentId);
-	ComponentIndex compIndex = components[entityId].second;
-	ComponentIndex lastIndex = components.size() - typeSize;
-
-	FreeComponentFunction freeFunction = BaseComponent::getFreeFunction(componentId);
-	BaseComponent* component = (BaseComponent*)&memory[compIndex];
-	BaseComponent* lastComponent = (BaseComponent*)&memory[lastIndex];
-	freeFunction(component);
-
-	if (compIndex == lastIndex)
-	{
-		memory.resize(lastIndex);
-		return;
-	}
-
-	std::memcpy(component, lastComponent, typeSize);
-	std::vector<std::pair<ComponentID, ComponentIndex>>& lastComponenets = ((Entity*)lastComponent->entityHandle)->components;
-	for (unsigned int i = 0; i < lastComponenets.size(); i++)
-	{
-		if (lastComponenets[i].first == componentId && lastComponenets[i].second == lastIndex)
-		{
-			lastComponenets[i].second = compIndex;
-			break;
-		}
+		this->entities[id] = this->entities[this->entities.size() - 1];
+		this->entities[id]->id = id;
+		this->entities.pop_back();
 	}
 }

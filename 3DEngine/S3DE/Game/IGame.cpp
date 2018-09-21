@@ -30,6 +30,7 @@ s3de::IGame::IGame(const std::string & title, unsigned int width, unsigned int h
 s3de::IGame::~IGame()
 {
 	delete this->display;
+	delete this->ecs;
 }
 
 void s3de::IGame::run()
@@ -44,6 +45,8 @@ void s3de::IGame::init()
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
+
+	this->ecs = new Ecs();
 }
 
 void s3de::IGame::loop()

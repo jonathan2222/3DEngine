@@ -189,7 +189,7 @@ namespace s3de
 		}
 
 	private:
-		static void generateAddPlane(Mesh* mesh, const sm::Vec3& normal, const sm::Vec3& offset, float size, float resolution)
+		static void generateAddPlane(Mesh* mesh, const sm::Vec3& normal, const sm::Vec3& offset, float size, unsigned int resolution)
 		{
 			float squareSize = size / (float)resolution;
 			float sqSize = 0.5f*squareSize;

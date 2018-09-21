@@ -126,6 +126,7 @@
   <ItemGroup>
     <ClCompile Include="S3DE\Game\ECS\Component.cpp" />
     <ClCompile Include="S3DE\Game\ECS\Ecs.cpp" />
+    <ClCompile Include="S3DE\Game\ECS\Entity.cpp" />
     <ClCompile Include="S3DE\Game\IGame.cpp" />
     <ClCompile Include="S3DE\Graphics\GUI\Display.cpp" />
     <ClCompile Include="S3DE\Graphics\Objects\Mesh.cpp" />
@@ -150,8 +151,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="S3DE\Game\ECS\Component.h" />
+    <ClInclude Include="S3DE\Game\ECS\Components\PositionComponent.h" />
     <ClInclude Include="S3DE\Game\ECS\Ecs.h" />
     <ClInclude Include="S3DE\Game\ECS\EcsDefines.h" />
+    <ClInclude Include="S3DE\Game\ECS\Entity.h" />
     <ClInclude Include="S3DE\Game\IGame.h" />
     <ClInclude Include="S3DE\Graphics\GUI\Display.h" />
     <ClInclude Include="S3DE\Graphics\GUI\WindowConfig.h" />

@@ -2,6 +2,7 @@
 #define S3DE_IGAME_H
 
 #include "../Graphics/GUI/Display.h"
+#include "ECS\Ecs.h"
 
 namespace s3de
 {
@@ -16,6 +17,9 @@ namespace s3de
 
 		virtual void OnInitiate() {}
 		virtual void OnFrameUpdate() {}
+
+	protected:
+		Ecs* ecs;
 
 	private:
 		void init();
