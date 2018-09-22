@@ -34,6 +34,13 @@ namespace s3de
 			return std::get<2>((*componentTypes)[id]);
 		}
 
+		static void deleteComponentTypes()
+		{
+			if (componentTypes != nullptr)
+				delete componentTypes;
+			componentTypes = nullptr;
+		}
+
 	private:
 		static std::vector<std::tuple<CreateComponentFunction, FreeComponentFunction, unsigned int>>* componentTypes;
 	};
@@ -52,7 +59,7 @@ namespace s3de
 	{
 		ComponentIndex index = memory.size();
 		memory.resize(index + T::SIZE);
-		// Allocate memory in 'memory' at position 'index' and fill it with data from comp. 
+		// Copy component data to 'memory' at position 'index'.
 		T* component = new(&memory[index])T(*(T*)comp);
 		component->entity = entity;
 		return index;
@@ -62,7 +69,8 @@ namespace s3de
 	void freeComponent(BaseComponent* comp)
 	{
 		T* component = (T*)comp;
-		delete component;
+		//delete component;
+		component->~T();
 	}
 
 	template<typename T>

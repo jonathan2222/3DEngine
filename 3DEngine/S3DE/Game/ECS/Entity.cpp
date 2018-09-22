@@ -13,12 +13,12 @@ void s3de::Entity::addComponent(BaseComponent * component, std::map<ComponentID,
 void s3de::Entity::deleteComponent(ComponentID componentId, ComponentIndex componentIndex, std::map<ComponentID, std::vector<Byte>>& memory)
 {
 	unsigned int typeSize = BaseComponent::getSize(componentId);
-	ComponentIndex compIndex = components[this->id].second;
-	ComponentIndex lastIndex = components.size() - typeSize;
+	ComponentIndex compIndex = components[componentId].second;
+	ComponentIndex lastIndex = memory[componentId].size() - typeSize;
 
 	FreeComponentFunction freeFunction = BaseComponent::getFreeFunction(componentId);
-	BaseComponent* component = (BaseComponent*)&memory[compIndex];
-	BaseComponent* movedComponent = (BaseComponent*)&memory[lastIndex];
+	BaseComponent* component = (BaseComponent*)&memory[componentId][compIndex];
+	BaseComponent* movedComponent = (BaseComponent*)&memory[componentId][lastIndex];
 	freeFunction(component);
 
 	if (compIndex == lastIndex)

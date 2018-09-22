@@ -17,9 +17,12 @@ Game::~Game()
 
 void Game::OnInitiate()
 {
+	// TODO: Make makeEntity work without using geComponent!
+	s3de::PositionComponent comp;
+	comp.position = sm::Vec3(1.0f, 1.0f, 1.0f);
 	s3de::Entity* entity = this->ecs->makeEntity<s3de::PositionComponent>();
-	s3de::PositionComponent* comp = entity->getComponent<s3de::PositionComponent>(this->ecs);
-	comp->position = sm::Vec3(1.0f, 0.0f, 0.5f);
+	//s3de::PositionComponent* comp = entity->getComponent<s3de::PositionComponent>(this->ecs);
+	//comp->position = sm::Vec3(1.0f, 1.0f, 1.0f);
 }
 
 void Game::OnFrameUpdate()

@@ -13,6 +13,7 @@ namespace s3de
 	struct Entity
 	{
 		Entity() {}
+		~Entity() {}
 		void addComponent(BaseComponent* component, std::map<ComponentID, std::vector<Byte>>& memory);
 		void deleteComponent(ComponentID componentId, ComponentIndex componentIndex, std::map<ComponentID, std::vector<Byte>>& memory);
 

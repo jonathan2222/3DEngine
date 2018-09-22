@@ -1,6 +1,5 @@
 #include "Component.h"
 
-// TODO: Delete this when not used!!
 std::vector<std::tuple<s3de::CreateComponentFunction, s3de::FreeComponentFunction, unsigned int>>* s3de::BaseComponent::componentTypes = nullptr;
 
 unsigned int s3de::BaseComponent::registerComponent(CreateComponentFunction createFunction, FreeComponentFunction freeFunction, unsigned int size)
