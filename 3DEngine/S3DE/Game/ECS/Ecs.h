@@ -4,9 +4,10 @@
 #include <vector>
 #include <map>
 
-#include"EcsDefines.h"
+#include "EcsDefines.h"
 #include "Component.h"
 #include "Entity.h"
+#include "System.h"
 
 namespace s3de
 {
@@ -29,9 +30,17 @@ namespace s3de
 		Entity* makeEntity(const std::vector<BaseComponent*>& components);
 		void removeEntity(Entity* entity);
 
+		void updateSystems(float dt);
+
+		template<typename T>
+		bool addSystem();
+		template<typename T>
+		bool removeSystem();
+
 	private:
 		std::map<ComponentID, std::vector<Byte>> componentsMemory;
 		std::vector<Entity*> entities;
+		std::vector<ISystem*> systems;
 	};
 
 	template<typename C>
@@ -79,6 +88,17 @@ namespace s3de
 		for (unsigned int i = 0; i < components.size(); i++)
 			delete components[i];
 		return entity;
+	}
+	template<typename T>
+	inline bool Ecs::addSystem()
+	{
+
+		return false;
+	}
+	template<typename T>
+	inline bool Ecs::removeSystem()
+	{
+		return false;
 	}
 }
 

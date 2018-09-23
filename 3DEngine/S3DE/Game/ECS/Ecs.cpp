@@ -52,3 +52,8 @@ void s3de::Ecs::removeEntity(s3de::Entity* entity)
 	}
 	this->entities.pop_back();
 }
+
+void s3de::Ecs::updateSystems(float dt)
+{
+
+}
