@@ -37,6 +37,9 @@ namespace s3de
 	template<typename C>
 	inline Entity * Ecs::makeEntity(C* c)
 	{
+		// --------- This will make it work without using getComponent ---------
+		C::ID;
+		// ---------------------------------------------------------------------
 		std::vector<BaseComponent*> components = { c };
 		return makeEntity(components);
 	}
@@ -44,6 +47,10 @@ namespace s3de
 	template<typename A, typename B>
 	inline Entity * Ecs::makeEntity(A * a, B * b)
 	{
+		// --------- This will make it work without using getComponent ---------
+		A::ID;
+		B::ID;
+		// ---------------------------------------------------------------------
 		std::vector<BaseComponent*> components = { a, b };
 		return makeEntity(components);
 	}
@@ -51,6 +58,11 @@ namespace s3de
 	template<typename A, typename B, typename C>
 	inline Entity * Ecs::makeEntity(A * a, B * b, C * c)
 	{
+		// --------- This will make it work without using getComponent ---------
+		A::ID;
+		B::ID;
+		C::ID;
+		// ---------------------------------------------------------------------
 		std::vector<BaseComponent*> components = { a, b, c };
 		return makeEntity(components);
 	}
@@ -58,6 +70,10 @@ namespace s3de
 	template<typename... C>
 	inline Entity* Ecs::makeEntity()
 	{
+		// --------- This will make it work without using getComponent ---------
+		std::vector<ComponentID> ids = { C::ID... };
+		// ---------------------------------------------------------------------
+
 		std::vector<BaseComponent*> components = { new C()... };
 		Entity* entity = makeEntity(components);
 		for (unsigned int i = 0; i < components.size(); i++)

@@ -170,5 +170,8 @@
     <ClInclude Include="S3DE\Game\ECS\Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="S3DE\Game\ECS\Components\BoolComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

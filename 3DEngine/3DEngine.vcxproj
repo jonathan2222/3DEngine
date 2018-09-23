@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="S3DE\Game\ECS\Component.h" />
+    <ClInclude Include="S3DE\Game\ECS\Components\BoolComponent.h" />
     <ClInclude Include="S3DE\Game\ECS\Components\PositionComponent.h" />
     <ClInclude Include="S3DE\Game\ECS\Ecs.h" />
     <ClInclude Include="S3DE\Game\ECS\EcsDefines.h" />
