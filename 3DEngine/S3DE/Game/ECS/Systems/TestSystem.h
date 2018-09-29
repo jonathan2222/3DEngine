@@ -10,6 +10,8 @@ namespace s3de
 	class TestSystem : public System<PositionComponent, BoolComponent>
 	{
 	public:
+		TestSystem();
+		~TestSystem();
 
 	private:
 	};

@@ -3,6 +3,7 @@
 #include "S3DE\Utils\Error.h"
 #include "S3DE\Game\ECS\Components\PositionComponent.h"
 #include "S3DE\Game\ECS\Components\BoolComponent.h"
+#include "S3DE\Game\ECS\Systems\TestSystem.h"
 
 Game::Game() : IGame()
 {
@@ -26,6 +27,8 @@ void Game::OnInitiate()
 	s3de::Entity* entity2 = this->ecs->makeEntity<s3de::BoolComponent>();
 
 	s3de::Entity* entity3 = this->ecs->makeEntity<s3de::PositionComponent>();
+
+	this->ecs->addSystem<s3de::TestSystem>();
 }
 
 void Game::OnFrameUpdate()

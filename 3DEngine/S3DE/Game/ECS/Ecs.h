@@ -38,6 +38,9 @@ namespace s3de
 		bool removeSystem();
 
 	private:
+		template<typename T>
+		int getSystem();
+
 		std::map<ComponentID, std::vector<Byte>> componentsMemory;
 		std::vector<Entity*> entities;
 		std::vector<ISystem*> systems;
@@ -92,13 +95,36 @@ namespace s3de
 	template<typename T>
 	inline bool Ecs::addSystem()
 	{
-
+		int index = getSystem<T>();
+		if (index == -1)
+		{
+			T* sys = new T();
+			this->systems.push_back(sys);
+			return true;
+		}
 		return false;
 	}
 	template<typename T>
 	inline bool Ecs::removeSystem()
 	{
+		int index = getSystem<T>();
+		if (index != -1)
+		{
+			ISystem* temp = this->systems[this->systems.size() - 1];
+			delete this->systems[i];
+			this->systems[i] = temp;
+			this->systems.pop_back();
+			return true;
+		}
 		return false;
+	}
+	template<typename T>
+	inline int Ecs::getSystem()
+	{
+		for (unsigned int i = 0; i < this->systems.size(); i++)
+			if (T::ID == this->systems[i]->getId())
+				return i;
+		return -1;
 	}
 }
 

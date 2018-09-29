@@ -20,6 +20,9 @@ s3de::Ecs::~Ecs()
 	for (unsigned int i = 0; i < numEntites; i++)
 		delete this->entities[i];
 
+	for (unsigned int i = 0; i < this->systems.size(); i++)
+		delete this->systems[i];
+
 	BaseComponent::deleteComponentTypes();
 }
 
