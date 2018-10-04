@@ -182,5 +182,8 @@
     <ClInclude Include="S3DE\Game\ECS\Systems\TestSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="S3DE\Game\ECS\Systems\HealthSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

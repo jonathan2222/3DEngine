@@ -16,7 +16,7 @@ namespace s3de
 		void run();
 
 		virtual void OnInitiate() {}
-		virtual void OnFrameUpdate() {}
+		virtual void OnFrameUpdate(float dt) {}
 
 	protected:
 		Ecs* ecs;

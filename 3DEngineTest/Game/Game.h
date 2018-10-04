@@ -11,7 +11,7 @@ public:
 	virtual ~Game();
 
 	void OnInitiate() override;
-	void OnFrameUpdate() override;
+	void OnFrameUpdate(float dt) override;
 
 private:
 

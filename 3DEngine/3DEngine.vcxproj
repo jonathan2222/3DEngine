@@ -158,6 +158,7 @@
     <ClInclude Include="S3DE\Game\ECS\EcsDefines.h" />
     <ClInclude Include="S3DE\Game\ECS\Entity.h" />
     <ClInclude Include="S3DE\Game\ECS\System.h" />
+    <ClInclude Include="S3DE\Game\ECS\Systems\HealthSystem.h" />
     <ClInclude Include="S3DE\Game\ECS\Systems\TestSystem.h" />
     <ClInclude Include="S3DE\Game\IGame.h" />
     <ClInclude Include="S3DE\Graphics\GUI\Display.h" />

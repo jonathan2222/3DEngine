@@ -1,27 +1,35 @@
 #include "Entity.h"
+#include "../../Utils/BitManipulation.h"
+#include "Ecs.h"
 
-void s3de::Entity::addComponent(BaseComponent * component, std::map<ComponentID, std::vector<Byte>>& memory)
+s3de::Entity::Entity(Ecs * ecs)
 {
-	const ComponentID id = components.size();
+	this->componentBitset = 0; 
+	this->ecsPtr = ecs;
+	this->flags = 0;
+}
+
+void s3de::Entity::addComponent(ComponentID componentId, BaseComponent * component, std::map<ComponentID, std::vector<Byte>>& memory)
+{
 	// Allocate and copy data to memory.
-	CreateComponentFunction createfunction = component->getCreateFunction(id);
-	ComponentIndex compIndex = createfunction(memory[id], this, component);
+	CreateComponentFunction createfunction = component->getCreateFunction(componentId);
+	ComponentIndex compIndex = createfunction(memory[componentId], this, component);
 	// Store index to component.
-	this->components.push_back(std::pair<ComponentID, ComponentIndex>(id, compIndex));
+	this->components.push_back(std::pair<ComponentID, ComponentIndex>(componentId, compIndex));
+	Utils::setBit<ComponentBitset>(this->componentBitset, componentId);
 }
 
 void s3de::Entity::deleteComponent(ComponentID componentId, ComponentIndex componentIndex, std::map<ComponentID, std::vector<Byte>>& memory)
 {
 	unsigned int typeSize = BaseComponent::getSize(componentId);
-	ComponentIndex compIndex = components[componentId].second;
 	ComponentIndex lastIndex = memory[componentId].size() - typeSize;
 
 	FreeComponentFunction freeFunction = BaseComponent::getFreeFunction(componentId);
-	BaseComponent* component = (BaseComponent*)&memory[componentId][compIndex];
+	BaseComponent* component = (BaseComponent*)&memory[componentId][componentIndex];
 	BaseComponent* movedComponent = (BaseComponent*)&memory[componentId][lastIndex];
 	freeFunction(component);
 
-	if (compIndex == lastIndex)
+	if (componentIndex == lastIndex)
 	{
 		memory[componentId].resize(lastIndex);
 		return;
@@ -33,10 +41,12 @@ void s3de::Entity::deleteComponent(ComponentID componentId, ComponentIndex compo
 	{
 		if (lastComponenets[i].first == componentId && lastComponenets[i].second == lastIndex)
 		{
-			lastComponenets[i].second = compIndex;
+			lastComponenets[i].second = componentIndex;
 			break;
 		}
 	}
 
 	memory[componentId].resize(lastIndex);
+
+	Utils::clearBit<ComponentBitset>(this->componentBitset, componentId);
 }

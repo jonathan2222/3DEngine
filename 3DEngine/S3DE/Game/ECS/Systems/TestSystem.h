@@ -4,6 +4,7 @@
 #include "../System.h"
 #include "../Components/BoolComponent.h"
 #include "../Components/PositionComponent.h"
+#include <iostream>
 
 namespace s3de
 {
@@ -13,14 +14,14 @@ namespace s3de
 		TestSystem();
 		~TestSystem();
 
-		void init() override
+		void init(Entity* entity) override
 		{
-
+			std::cout << "Init TestStstem" << std::endl;
 		}
 
 		void update(float dt, Entity* entity) override
 		{
-
+			//std::cout << "Update TestStstem with entity " << entity->id << std::endl;
 		}
 
 	private:
