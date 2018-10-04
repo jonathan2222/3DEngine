@@ -9,50 +9,27 @@
 
 namespace s3de
 {
+	
 	class ISystem
 	{
 	public:
-		static unsigned int registerSystem();
-
 		virtual void init() = 0;
 		virtual void update(float dt, Entity* entity) = 0;
+		
 
-		unsigned int getId() const
-		{
-			return id;
-		}
-
-	private:
-		unsigned int id;
-		static unsigned int counter;
+	protected:
 		std::vector<ComponentID> requirements;
 	};
 
-	template<typename... T>
-	struct BSystem : public ISystem
-	{
-		BSystem();
-		static unsigned int ID;
-	};
-
-	template<typename ...T>
-	inline BSystem<T...>::BSystem() : ISystem()
-	{
-		this->id = ID;
-	}
-
-	template<typename ...T>
-	unsigned int BSystem<T...>::ID(registerSystem());
-
 	template<typename... Requirements>
-	class System : public BSystem<Requirements...>
+	class System : public ISystem
 	{
 	public:
 		System();
 	};
 
-	template<typename... Requirements>
-	inline System<Requirements...>::System() : BSystem<Requirements...>()
+	template<typename ...Requirements>
+	inline System<Requirements...>::System()
 	{
 		this->requirements = { Requirements::ID... };
 	}

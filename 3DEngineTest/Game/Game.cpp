@@ -28,7 +28,8 @@ void Game::OnInitiate()
 
 	s3de::Entity* entity3 = this->ecs->makeEntity<s3de::PositionComponent>();
 
-	this->ecs->addSystem<s3de::TestSystem>();
+	s3de::TestSystem* sys = new s3de::TestSystem();
+	this->ecs->addSystem(sys);
 }
 
 void Game::OnFrameUpdate()

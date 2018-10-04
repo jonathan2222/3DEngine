@@ -13,6 +13,16 @@ namespace s3de
 		TestSystem();
 		~TestSystem();
 
+		void init() override
+		{
+
+		}
+
+		void update(float dt, Entity* entity) override
+		{
+
+		}
+
 	private:
 	};
 }

@@ -60,3 +60,22 @@ void s3de::Ecs::updateSystems(float dt)
 {
 
 }
+
+bool s3de::Ecs::addSystem(ISystem * system)
+{
+	this->systems.push_back(system);
+	return true;
+}
+
+bool s3de::Ecs::removeSystem(ISystem * system)
+{
+	for(unsigned int i = 0; i < this->systems.size(); i++)
+		if (this->systems[i] == system)
+		{
+			delete this->systems[i];
+			this->systems[i] = this->systems[this->systems.size() - 1];
+			this->systems.pop_back();
+			return true;
+		}
+	return false;
+}
