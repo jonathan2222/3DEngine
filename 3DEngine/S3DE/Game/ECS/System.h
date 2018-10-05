@@ -27,7 +27,8 @@ namespace s3de
 
 		bool hasComponents(ComponentBitset componentBitset) const
 		{
-			return this->componentBitset == componentBitset;
+			ComponentBitset bitset = this->componentBitset & componentBitset;
+			return this->componentBitset == bitset;
 		}
 
 		const std::vector<ComponentID>& getRequirements() const

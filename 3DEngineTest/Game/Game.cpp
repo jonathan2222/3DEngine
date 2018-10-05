@@ -43,7 +43,27 @@ void Game::OnInitiate()
 	s3de::TransformComponent transformComponent;
 	//transformComponent.model = sm::MathsTransform::rotationMat(sm::MathsConstatns::PI*.5f, 0.0f, 0.0f);
 	//transformComponent.world = sm::MathsTransform::translate(0.0f, 0.5f, -2.0f);
-	s3de::Entity* barrelEntity = this->ecs->makeEntity<s3de::RenderableComponent, s3de::TransformComponent>(&renderableComponent, &transformComponent);
+	//s3de::Entity* barrelEntity = this->ecs->makeEntity<s3de::RenderableComponent, s3de::TransformComponent>(&renderableComponent, &transformComponent);
+
+	/*
+	s3de::HealthComponent healthComp;
+	healthComp.health = 10000.0f;
+	s3de::TransformComponent transformComponent2;
+	transformComponent2.world = sm::MathsTransform::translate(1.0f, 0.0f, 0.0f);
+	s3de::Entity* barrelEntity2 = this->ecs->makeEntity<s3de::RenderableComponent, s3de::TransformComponent, s3de::HealthComponent>(&renderableComponent, &transformComponent2, &healthComp);
+	*/
+	
+	s3de::HealthComponent healthComp;
+	const unsigned int SIDE = 10;
+	for (unsigned int i = 0; i < SIDE*SIDE; i++)
+	{
+		float x = (float)(i % SIDE);
+		float y = (float)i / SIDE;
+		s3de::TransformComponent transform;
+		//transformComponent.model = sm::MathsTransform::rotationMat(sm::MathsConstatns::PI*.5f, 0.0f, 0.0f);
+		transform.world = sm::MathsTransform::translate(x-(float)SIDE*.5f, y-(float)SIDE*.5f, -(float)(i%4));
+		this->ecs->makeEntity<s3de::RenderableComponent, s3de::TransformComponent, s3de::HealthComponent>(&renderableComponent, &transform, &healthComp);
+	}
 
 	// ----------------- TEST ENTITIES -----------------
 	s3de::PositionComponent* comp = entity->getComponent<s3de::PositionComponent>();

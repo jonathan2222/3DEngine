@@ -30,7 +30,7 @@ namespace s3de
 	public:
 		void init(Entity* entity) override
 		{
-			std::cout << "Init RenderSystem" << std::endl;
+			std::cout << "Init RenderSystem for entity " << entity->id << std::endl;
 			this->shader = &this->renderer.getShader();
 			this->camera.create(sm::Vec3(0.0f, 0.0f, -1.0f), sm::Vec3(0.0f, 0.0f, 5.0f), (float)DEFAULT_WINDOW_WIDTH/(float)DEFAULT_WINDOW_HEIGHT);
 		}

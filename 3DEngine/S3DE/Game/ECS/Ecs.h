@@ -43,11 +43,11 @@ namespace s3de
 		std::vector<ISystem*> systems;
 	};
 
-	template<typename C>
-	inline Entity * Ecs::makeEntity(C* c)
+	template<typename A>
+	inline Entity * Ecs::makeEntity(A* c)
 	{
 		std::vector<BaseComponent*> components = { c };
-		std::vector<ComponentID> ids = { A::ID};
+		std::vector<ComponentID> ids = { A::ID };
 		return makeEntity(components, ids);
 	}
 

@@ -21,7 +21,7 @@ namespace s3de
 			HealthComponent* comp = entity->getComponent<HealthComponent>();
 			comp->health = rand() % 11 + 20;
 			internalTime = 0.0f;
-			std::cout << "Init HealthSystem, Health: " << comp->health << std::endl;
+			std::cout << "Init HealthSystem for entity " << entity->id << " , Health: " << comp->health << std::endl;
 		}
 
 		void update(float dt, Entity* entity) override
