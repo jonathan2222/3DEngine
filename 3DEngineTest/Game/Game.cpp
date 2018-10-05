@@ -62,7 +62,7 @@ void Game::OnInitiate()
 		s3de::TransformComponent transform;
 		//transformComponent.model = sm::MathsTransform::rotationMat(sm::MathsConstatns::PI*.5f, 0.0f, 0.0f);
 		transform.world = sm::MathsTransform::translate(x-(float)SIDE*.5f, y-(float)SIDE*.5f, -(float)(i%4));
-		this->ecs->makeEntity<s3de::RenderableComponent, s3de::TransformComponent, s3de::HealthComponent>(&renderableComponent, &transform, &healthComp);
+		this->ecs->makeEntity<s3de::RenderableComponent, s3de::TransformComponent, s3de::HealthComponent>(renderableComponent, transform, healthComp);
 	}
 
 	// ----------------- TEST ENTITIES -----------------
