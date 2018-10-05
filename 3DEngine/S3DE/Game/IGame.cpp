@@ -51,18 +51,9 @@ void s3de::IGame::init()
 
 void s3de::IGame::loop()
 {
-	/*
-	s3de::Model* sphere = s3de::ModelGenerator::generateSphere();
-
-	s3de::Model* barrel = s3de::ModelLoader::loadModel("./../3DEngine/S3DE/Resources/Models/Barrel.fbx");
-
 	s3de::FPSCamera camera(sm::Vec3(0.0f, 0.0f, -1.0f), sm::Vec3(0.0f, 0.0f, 5.0f), display->getAspectRatio());
 	glfwSetCursorPos(display->getWindowPtr(), display->getWidth() / 2, display->getHeight() / 2);
 
-	s3de::Renderer renderer;
-	renderer.setWireframe(false);
-	s3de::Shader shader = renderer.getShader();
-	*/
 	sm::Mat4 world = sm::MathsTransform::translate(0.0f, 0.5f, -2.0f);
 
 	s3de::Timer timer;

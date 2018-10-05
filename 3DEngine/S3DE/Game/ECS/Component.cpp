@@ -1,8 +1,8 @@
 #include "Component.h"
 
-std::vector<std::tuple<s3de::CreateComponentFunction, s3de::FreeComponentFunction, unsigned int>>* s3de::BaseComponent::componentTypes = nullptr;
+std::vector<std::tuple<s3de::CreateComponentFunction, s3de::FreeComponentFunction, unsigned int>>* s3de::ECSBaseComponent::componentTypes = nullptr;
 
-unsigned int s3de::BaseComponent::registerComponent(CreateComponentFunction createFunction, FreeComponentFunction freeFunction, unsigned int size)
+unsigned int s3de::ECSBaseComponent::registerComponent(CreateComponentFunction createFunction, FreeComponentFunction freeFunction, unsigned int size)
 {
 	if (componentTypes == nullptr)
 	{

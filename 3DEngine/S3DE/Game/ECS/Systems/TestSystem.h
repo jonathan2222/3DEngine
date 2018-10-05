@@ -8,7 +8,7 @@
 
 namespace s3de
 {
-	class TestSystem : public System<PositionComponent, BoolComponent>
+	class TestSystem : public ECSSystem<PositionComponent, BoolComponent>
 	{
 	public:
 		TestSystem();

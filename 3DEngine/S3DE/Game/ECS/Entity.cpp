@@ -9,7 +9,7 @@ s3de::Entity::Entity(Ecs * ecs)
 	this->flags = 0;
 }
 
-void s3de::Entity::addComponent(ComponentID componentId, BaseComponent * component, std::map<ComponentID, std::vector<Byte>>& memory)
+void s3de::Entity::addComponent(ComponentID componentId, ECSBaseComponent * component, std::map<ComponentID, std::vector<Byte>>& memory)
 {
 	// Allocate and copy data to memory.
 	CreateComponentFunction createfunction = component->getCreateFunction(componentId);
@@ -21,12 +21,12 @@ void s3de::Entity::addComponent(ComponentID componentId, BaseComponent * compone
 
 void s3de::Entity::deleteComponent(ComponentID componentId, ComponentIndex componentIndex, std::map<ComponentID, std::vector<Byte>>& memory)
 {
-	unsigned int typeSize = BaseComponent::getSize(componentId);
+	unsigned int typeSize = ECSBaseComponent::getSize(componentId);
 	ComponentIndex lastIndex = memory[componentId].size() - typeSize;
 
-	FreeComponentFunction freeFunction = BaseComponent::getFreeFunction(componentId);
-	BaseComponent* component = (BaseComponent*)&memory[componentId][componentIndex];
-	BaseComponent* movedComponent = (BaseComponent*)&memory[componentId][lastIndex];
+	FreeComponentFunction freeFunction = ECSBaseComponent::getFreeFunction(componentId);
+	ECSBaseComponent* component = (ECSBaseComponent*)&memory[componentId][componentIndex];
+	ECSBaseComponent* movedComponent = (ECSBaseComponent*)&memory[componentId][lastIndex];
 	freeFunction(component);
 
 	if (componentIndex == lastIndex)

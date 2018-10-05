@@ -3,6 +3,7 @@
 
 #include "S3DE\Game\IGame.h"
 #include "S3DE\Utils\ModelLoader.h"
+#include "S3DE\Graphics\Rendering\Renderer.h"
 
 class Game : public s3de::IGame
 {
@@ -16,6 +17,7 @@ public:
 
 private:
 	s3de::Model* model;
+	s3de::Renderer renderer;
 };
 
 #endif

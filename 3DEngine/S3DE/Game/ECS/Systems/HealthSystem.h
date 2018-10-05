@@ -8,12 +8,12 @@
 
 namespace s3de
 {
-	struct HealthComponent : public Component<HealthComponent>
+	struct HealthComponent : public ECSComponent<HealthComponent>
 	{
 		float health;
 	};
 
-	class HealthSystem : public System<HealthComponent>
+	class HealthSystem : public ECSSystem<HealthComponent>
 	{
 	public:
 		void init(Entity* entity) override

@@ -11,11 +11,11 @@
 namespace s3de
 {
 	
-	class ISystem
+	class ECSISystem
 	{
 	public:
-		ISystem() {}
-		virtual ~ISystem() {}
+		ECSISystem() {}
+		virtual ~ECSISystem() {}
 
 		virtual void init(Entity* entity) = 0;
 		virtual void update(float dt, Entity* entity) = 0;
@@ -48,15 +48,72 @@ namespace s3de
 	};
 
 	template<typename... Requirements>
-	class System : public ISystem
+	class ECSSystem : public ECSISystem
 	{
 	public:
-		System();
-		virtual ~System() {}
+		ECSSystem();
+		virtual ~ECSSystem() {}
 	};
 
 	template<typename ...Requirements>
-	inline System<Requirements...>::System()
+	inline ECSSystem<Requirements...>::ECSSystem()
+	{
+		this->requirements = { Requirements::ID... };
+		this->componentBitset = 0;
+		for (ComponentID id : this->requirements)
+			Utils::setBit<ComponentBitset>(this->componentBitset, id);
+	}
+
+	// ---------------------------------- RENDER SYSTEM ----------------------------------
+
+	class Renderer;
+	class ECSIRenderSystem
+	{
+	public:
+		ECSIRenderSystem() {};
+		virtual ~ECSIRenderSystem() {}
+
+		virtual void initRender(Renderer& renderer) = 0;
+		virtual void init(Entity* entity) = 0;
+		virtual void render(Renderer& renderer, Entity* entity) = 0;
+
+		ComponentBitset getComponentBitset() const
+		{
+			return this->componentBitset;
+		}
+
+		bool hasComponents(ComponentBitset componentBitset) const
+		{
+			ComponentBitset bitset = this->componentBitset & componentBitset;
+			return this->componentBitset == bitset;
+		}
+
+		const std::vector<ComponentID>& getRequirements() const
+		{
+			return this->requirements;
+		}
+
+		void setEcsPtr(Ecs* ecs)
+		{
+			this->ecsPtr = ecs;
+		}
+
+	protected:
+		Ecs * ecsPtr;
+		std::vector<ComponentID> requirements;
+		ComponentBitset componentBitset;
+	};
+
+	template<typename... Requirements>
+	class ECSRenderSystem : public ECSIRenderSystem
+	{
+	public:
+		ECSRenderSystem();
+		virtual ~ECSRenderSystem() {}
+	};
+
+	template<typename ...Requirements>
+	inline ECSRenderSystem<Requirements...>::ECSRenderSystem()
 	{
 		this->requirements = { Requirements::ID... };
 		this->componentBitset = 0;

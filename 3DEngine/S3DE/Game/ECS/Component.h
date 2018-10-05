@@ -9,11 +9,11 @@
 namespace s3de
 {
 	struct Entity;
-	struct BaseComponent;
-	typedef ComponentIndex(*CreateComponentFunction)(std::vector<Byte>& memory, Entity* entity, BaseComponent* comp);
-	typedef void(*FreeComponentFunction)(BaseComponent* comp);
+	struct ECSBaseComponent;
+	typedef ComponentIndex(*CreateComponentFunction)(std::vector<Byte>& memory, Entity* entity, ECSBaseComponent* comp);
+	typedef void(*FreeComponentFunction)(ECSBaseComponent* comp);
 
-	struct BaseComponent
+	struct ECSBaseComponent
 	{
 		Entity* entity = nullptr;
 
@@ -46,7 +46,7 @@ namespace s3de
 	};
 
 	template<typename T>
-	struct Component : BaseComponent
+	struct ECSComponent : ECSBaseComponent
 	{
 		static CreateComponentFunction CREATE_FUNCTION;
 		static FreeComponentFunction FREE_FUNCTION;
@@ -55,7 +55,7 @@ namespace s3de
 	};
 
 	template<typename T>
-	ComponentIndex createComponent(std::vector<unsigned char>& memory, Entity* entity, BaseComponent* comp)
+	ComponentIndex createComponent(std::vector<unsigned char>& memory, Entity* entity, ECSBaseComponent* comp)
 	{
 		ComponentIndex index = memory.size();
 		memory.resize(index + T::SIZE);
@@ -66,7 +66,7 @@ namespace s3de
 	}
 
 	template<typename T>
-	void freeComponent(BaseComponent* comp)
+	void freeComponent(ECSBaseComponent* comp)
 	{
 		T* component = (T*)comp;
 		//delete component;
@@ -74,16 +74,16 @@ namespace s3de
 	}
 
 	template<typename T>
-	CreateComponentFunction Component<T>::CREATE_FUNCTION(createComponent<T>);
+	CreateComponentFunction ECSComponent<T>::CREATE_FUNCTION(createComponent<T>);
 
 	template<typename T>
-	FreeComponentFunction Component<T>::FREE_FUNCTION(freeComponent<T>);
+	FreeComponentFunction ECSComponent<T>::FREE_FUNCTION(freeComponent<T>);
 
 	template<typename T>
-	unsigned int Component<T>::SIZE(sizeof(T));
+	unsigned int ECSComponent<T>::SIZE(sizeof(T));
 
 	template<typename T>
-	ComponentID Component<T>::ID(registerComponent(Component<T>::CREATE_FUNCTION, Component<T>::FREE_FUNCTION, sizeof(T)));
+	ComponentID ECSComponent<T>::ID(registerComponent(ECSComponent<T>::CREATE_FUNCTION, ECSComponent<T>::FREE_FUNCTION, sizeof(T)));
 }
 
 #endif

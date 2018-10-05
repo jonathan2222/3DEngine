@@ -14,7 +14,7 @@ namespace s3de
 	{
 		Entity(Ecs* ecs);
 		~Entity() {}
-		void addComponent(ComponentID componentId, BaseComponent* component, std::map<ComponentID, std::vector<Byte>>& memory);
+		void addComponent(ComponentID componentId, ECSBaseComponent* component, std::map<ComponentID, std::vector<Byte>>& memory);
 		void deleteComponent(ComponentID componentId, ComponentIndex componentIndex, std::map<ComponentID, std::vector<Byte>>& memory);
 
 		template<typename C>

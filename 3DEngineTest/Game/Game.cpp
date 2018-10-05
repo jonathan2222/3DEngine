@@ -41,17 +41,9 @@ void Game::OnInitiate()
 	s3de::RenderableComponent renderableComponent;
 	renderableComponent.model = this->model;
 	s3de::TransformComponent transformComponent;
-	//transformComponent.model = sm::MathsTransform::rotationMat(sm::MathsConstatns::PI*.5f, 0.0f, 0.0f);
-	//transformComponent.world = sm::MathsTransform::translate(0.0f, 0.5f, -2.0f);
-	//s3de::Entity* barrelEntity = this->ecs->makeEntity<s3de::RenderableComponent, s3de::TransformComponent>(&renderableComponent, &transformComponent);
-
-	/*
-	s3de::HealthComponent healthComp;
-	healthComp.health = 10000.0f;
-	s3de::TransformComponent transformComponent2;
-	transformComponent2.world = sm::MathsTransform::translate(1.0f, 0.0f, 0.0f);
-	s3de::Entity* barrelEntity2 = this->ecs->makeEntity<s3de::RenderableComponent, s3de::TransformComponent, s3de::HealthComponent>(&renderableComponent, &transformComponent2, &healthComp);
-	*/
+	transformComponent.model = sm::MathsTransform::rotationMat(sm::MathsConstatns::PI*.5f, 0.0f, 0.0f);
+	transformComponent.world = sm::MathsTransform::translate(0.0f, 0.0f, -2.0f);
+	s3de::Entity* barrelEntity = this->ecs->makeEntity<s3de::RenderableComponent, s3de::TransformComponent>(renderableComponent, transformComponent);
 	
 	s3de::HealthComponent healthComp;
 	const unsigned int SIDE = 10;
@@ -61,7 +53,7 @@ void Game::OnInitiate()
 		float y = (float)i / SIDE;
 		s3de::TransformComponent transform;
 		//transformComponent.model = sm::MathsTransform::rotationMat(sm::MathsConstatns::PI*.5f, 0.0f, 0.0f);
-		transform.world = sm::MathsTransform::translate(x-(float)SIDE*.5f, y-(float)SIDE*.5f, -(float)(i%4));
+		transform.world = sm::MathsTransform::translate(x-(float)SIDE*.5f, y-(float)SIDE*.5f, 0.0f);
 		this->ecs->makeEntity<s3de::RenderableComponent, s3de::TransformComponent, s3de::HealthComponent>(renderableComponent, transform, healthComp);
 	}
 
@@ -71,19 +63,15 @@ void Game::OnInitiate()
 	entity->getComponent<s3de::BoolComponent>()->b = false;
 
 	// ------------------ ADD SYSTEMS ------------------
-	s3de::TestSystem* sys = new s3de::TestSystem();
-	this->ecs->addSystem(sys);
-	s3de::HealthSystem* sys2 = new s3de::HealthSystem();
-	this->ecs->addSystem(sys2);
-
-	s3de::RenderSystem* renderSystem = new s3de::RenderSystem();
-	this->ecs->addSystem(renderSystem);
+	this->ecs->addSystem(new s3de::TestSystem());
+	this->ecs->addSystem(new s3de::HealthSystem());
+	this->ecs->addRenderSystem(new s3de::RenderSystem());
 
 	// ------------------ INIT SYSTEMS -----------------
-	this->ecs->initSystems();
+	this->ecs->initSystems(renderer);
 }
 
 void Game::OnFrameUpdate(float dt)
 {
-	this->ecs->updateSystems(dt);
+	this->ecs->updateSystems(renderer, dt);
 }

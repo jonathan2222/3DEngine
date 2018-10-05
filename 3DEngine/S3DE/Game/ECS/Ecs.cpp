@@ -9,11 +9,11 @@ s3de::Ecs::~Ecs()
 {
 	for (std::map<ComponentID, std::vector<Byte>>::iterator it = this->componentsMemory.begin(); it != this->componentsMemory.end(); it++)
 	{
-		unsigned int size = BaseComponent::getSize(it->first);
-		FreeComponentFunction freeFunction = BaseComponent::getFreeFunction(it->first);
+		unsigned int size = ECSBaseComponent::getSize(it->first);
+		FreeComponentFunction freeFunction = ECSBaseComponent::getFreeFunction(it->first);
 		for (unsigned int i = 0; i < it->second.size(); i += size)
 		{
-			freeFunction((BaseComponent*)&it->second[i]);
+			freeFunction((ECSBaseComponent*)&it->second[i]);
 		}
 	}
 
@@ -24,10 +24,13 @@ s3de::Ecs::~Ecs()
 	for (unsigned int i = 0; i < this->systems.size(); i++)
 		delete this->systems[i];
 
-	BaseComponent::deleteComponentTypes();
+	for (unsigned int i = 0; i < this->renSystems.size(); i++)
+		delete this->renSystems[i];
+
+	ECSBaseComponent::deleteComponentTypes();
 }
 
-s3de::Entity* s3de::Ecs::makeEntity(const std::vector<BaseComponent*>& components, const std::vector<ComponentID>& ids)
+s3de::Entity* s3de::Ecs::makeEntity(const std::vector<ECSBaseComponent*>& components, const std::vector<ComponentID>& ids)
 {
 	Entity* entity = new Entity(this);
 	entity->id = this->entities.size();
@@ -55,20 +58,24 @@ void s3de::Ecs::removeEntity(s3de::Entity* entity)
 	this->entities.pop_back();
 }
 
-void s3de::Ecs::initSystems()
+void s3de::Ecs::initSystems(Renderer & renderer)
 {
-	for (unsigned int i = 0; i < this->systems.size(); i++)
+	for (unsigned int i = 0; i < this->entities.size(); i++)
 	{
-		const std::vector<ComponentID> requirements = this->systems[i]->getRequirements();
-		for (unsigned int j = 0; j < this->entities.size(); j++)
-		{
-			if (this->systems[i]->hasComponents(this->entities[j]->componentBitset))
-				this->systems[i]->init(this->entities[j]);
-		}
+		for (unsigned int j = 0; j < this->systems.size(); j++)
+			if (this->systems[j]->hasComponents(this->entities[i]->componentBitset))
+				this->systems[j]->init(this->entities[i]);
+
+		for (unsigned int j = 0; j < this->renSystems.size(); j++)
+			if (this->renSystems[j]->hasComponents(this->entities[i]->componentBitset))
+				this->renSystems[j]->init(this->entities[i]);
 	}
+
+	for (unsigned int j = 0; j < this->renSystems.size(); j++)
+			this->renSystems[j]->initRender(renderer);
 }
 
-void s3de::Ecs::updateSystems(float dt)
+void s3de::Ecs::updateSystems(Renderer & renderer, float dt)
 {
 	std::vector<Entity*> entitiesToRemove;
 	for (unsigned int i = 0; i < this->entities.size(); i++)
@@ -85,20 +92,24 @@ void s3de::Ecs::updateSystems(float dt)
 				removeFlagHasSet = true;
 			}
 		}
+
+		for (unsigned int j = 0; j < this->renSystems.size(); j++)
+			if (this->renSystems[j]->hasComponents(this->entities[i]->componentBitset))
+				this->renSystems[j]->render(renderer, this->entities[i]);
 	}
 
 	for (unsigned int i = 0; i < entitiesToRemove.size(); i++)
 		removeEntity(entitiesToRemove[i]);
 }
 
-bool s3de::Ecs::addSystem(ISystem * system)
+bool s3de::Ecs::addSystem(ECSISystem * system)
 {
 	system->setEcsPtr(this);
 	this->systems.push_back(system);
 	return true;
 }
 
-bool s3de::Ecs::removeSystem(ISystem * system)
+bool s3de::Ecs::removeSystem(ECSISystem * system)
 {
 	for(unsigned int i = 0; i < this->systems.size(); i++)
 		if (this->systems[i] == system)
@@ -106,6 +117,26 @@ bool s3de::Ecs::removeSystem(ISystem * system)
 			delete this->systems[i];
 			this->systems[i] = this->systems[this->systems.size() - 1];
 			this->systems.pop_back();
+			return true;
+		}
+	return false;
+}
+
+bool s3de::Ecs::addRenderSystem(ECSIRenderSystem * system)
+{
+	system->setEcsPtr(this);
+	this->renSystems.push_back(system);
+	return true;
+}
+
+bool s3de::Ecs::removeRenderSystem(ECSIRenderSystem * system)
+{
+	for (unsigned int i = 0; i < this->renSystems.size(); i++)
+		if (this->renSystems[i] == system)
+		{
+			delete this->renSystems[i];
+			this->renSystems[i] = this->renSystems[this->renSystems.size() - 1];
+			this->renSystems.pop_back();
 			return true;
 		}
 	return false;

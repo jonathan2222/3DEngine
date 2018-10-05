@@ -6,7 +6,7 @@
 
 namespace s3de
 {
-	struct PositionComponent : public Component<PositionComponent>
+	struct PositionComponent : public ECSComponent<PositionComponent>
 	{
 		sm::Vec3 position;
 	};

@@ -6,7 +6,7 @@
 
 namespace s3de
 {
-	struct TransformComponent : public Component<TransformComponent>
+	struct TransformComponent : public ECSComponent<TransformComponent>
 	{
 		sm::Mat4 model;
 		sm::Mat4 world;

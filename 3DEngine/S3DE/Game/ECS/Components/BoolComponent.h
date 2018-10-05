@@ -5,7 +5,7 @@
 
 namespace s3de
 {
-	struct BoolComponent : public Component<BoolComponent>
+	struct BoolComponent : public ECSComponent<BoolComponent>
 	{
 		bool b;
 	};
