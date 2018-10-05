@@ -34,15 +34,6 @@ namespace s3de
 				printf("[HealthSystem] Entity[%d] DEATH HAS FALLEN UPON IT! [dt: %f]\n", entity->id, comp->health, dt);
 				entity->flags |= ENTITY_REMOVE;
 			}
-			else
-			{
-				internalTime += dt;
-				if (internalTime > 1.0f)
-				{
-					printf("[HealthSystem] Entity[%d] has %f utits of health left. [dt: %f]\n", entity->id, comp->health, dt);
-					internalTime = 0.0f;
-				}
-			}
 		}
 
 	private:

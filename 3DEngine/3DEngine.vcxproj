@@ -154,10 +154,12 @@
     <ClInclude Include="S3DE\Game\ECS\Component.h" />
     <ClInclude Include="S3DE\Game\ECS\Components\BoolComponent.h" />
     <ClInclude Include="S3DE\Game\ECS\Components\PositionComponent.h" />
+    <ClInclude Include="S3DE\Game\ECS\Components\TransformComponent.h" />
     <ClInclude Include="S3DE\Game\ECS\Ecs.h" />
     <ClInclude Include="S3DE\Game\ECS\EcsDefines.h" />
     <ClInclude Include="S3DE\Game\ECS\Entity.h" />
     <ClInclude Include="S3DE\Game\ECS\System.h" />
+    <ClInclude Include="S3DE\Game\ECS\Systems\RenderSystem.h" />
     <ClInclude Include="S3DE\Game\ECS\Systems\HealthSystem.h" />
     <ClInclude Include="S3DE\Game\ECS\Systems\TestSystem.h" />
     <ClInclude Include="S3DE\Game\IGame.h" />

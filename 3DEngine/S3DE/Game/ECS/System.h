@@ -14,6 +14,9 @@ namespace s3de
 	class ISystem
 	{
 	public:
+		ISystem() {}
+		virtual ~ISystem() {}
+
 		virtual void init(Entity* entity) = 0;
 		virtual void update(float dt, Entity* entity) = 0;
 		
@@ -48,6 +51,7 @@ namespace s3de
 	{
 	public:
 		System();
+		virtual ~System() {}
 	};
 
 	template<typename ...Requirements>

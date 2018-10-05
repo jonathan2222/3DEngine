@@ -26,6 +26,11 @@ s3de::Camera::~Camera()
 {
 }
 
+void s3de::Camera::create(const sm::Vec3 & direction, const sm::Vec3 & position, float aspectRatio)
+{
+	init(direction, position, sm::Vec3(0.0f, 1.0f, 0.0f), DEFAULT_FOV, aspectRatio, DEFAULT_ZNEAR, DEFAULT_ZFAR);
+}
+
 void s3de::Camera::updateVP(const sm::Vec3 & worldUp)
 {
 	updateView(worldUp);

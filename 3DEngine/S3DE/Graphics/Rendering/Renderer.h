@@ -9,6 +9,9 @@
 
 namespace s3de
 {
+	/*
+		Can only be one instance of this class or else it wont work!!
+	*/
 	class Renderer
 	{
 	public:

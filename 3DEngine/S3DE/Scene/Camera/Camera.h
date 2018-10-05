@@ -18,6 +18,8 @@ namespace s3de
 
 		virtual void update(GLFWwindow* window, float dt, int windowWidth, int windowHeight) {};
 
+		void create(const sm::Vec3& direction, const sm::Vec3& position, float aspectRatio);
+
 		void updateVP(const sm::Vec3& worldUp);
 		void updateProj();
 		void updateView(const sm::Vec3& worldUp);

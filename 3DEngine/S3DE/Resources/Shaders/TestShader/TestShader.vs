@@ -7,13 +7,13 @@ out vec3 fragPos;
 out vec3 fragNormal;
 out mat4 fragWorld;
 
-uniform mat4 world;
+uniform mat4 matrix;
 uniform mat4 vp;
 
 void main()
 {
-	fragWorld = world;
-	gl_Position = vp*world*vec4(vertPos, 1.0);
-	fragPos = (world*vec4(vertPos, 1.0)).xyz;
-	fragNormal = (world*vec4(vertNormal, 0.0)).xyz;
+	fragWorld = matrix;
+	gl_Position = vp*matrix*vec4(vertPos, 1.0);
+	fragPos = (matrix*vec4(vertPos, 1.0)).xyz;
+	fragNormal = (matrix*vec4(vertNormal, 0.0)).xyz;
 }

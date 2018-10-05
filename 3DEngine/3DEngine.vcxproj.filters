@@ -185,5 +185,11 @@
     <ClInclude Include="S3DE\Game\ECS\Systems\HealthSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="S3DE\Game\ECS\Systems\RenderSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="S3DE\Game\ECS\Components\TransformComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

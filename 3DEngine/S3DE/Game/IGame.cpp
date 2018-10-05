@@ -51,6 +51,7 @@ void s3de::IGame::init()
 
 void s3de::IGame::loop()
 {
+	/*
 	s3de::Model* sphere = s3de::ModelGenerator::generateSphere();
 
 	s3de::Model* barrel = s3de::ModelLoader::loadModel("./../3DEngine/S3DE/Resources/Models/Barrel.fbx");
@@ -61,7 +62,7 @@ void s3de::IGame::loop()
 	s3de::Renderer renderer;
 	renderer.setWireframe(false);
 	s3de::Shader shader = renderer.getShader();
-
+	*/
 	sm::Mat4 world = sm::MathsTransform::translate(0.0f, 0.5f, -2.0f);
 
 	s3de::Timer timer;
@@ -75,11 +76,11 @@ void s3de::IGame::loop()
 		if (display->sizeUpdated)
 		{
 			// Update camera
-			camera.setAspectRatio(display->getAspectRatio());
-			camera.updateProj();
+			//camera.setAspectRatio(display->getAspectRatio());
+			//camera.updateProj();
 			display->sizeUpdated = false;
 		}
-
+		/*
 		if (s3de::InputManager::toggle(display->getWindowPtr(), GLFW_KEY_C))
 		{
 			if (activeState != 1)
@@ -97,10 +98,12 @@ void s3de::IGame::loop()
 				glfwSetInputMode(display->getWindowPtr(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 			activeState = 2;
 		}
+		*/
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// ----------------- Update -----------------
 		this->OnFrameUpdate(timer.getDeltaTime());
-
+		/*
 		// ----------------- Render -----------------
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -108,10 +111,10 @@ void s3de::IGame::loop()
 
 		sm::Quaternion baseRotation2(timer.getDeltaTime(), sm::Vec3(0.0f, 1.0f, 0.0f));
 		world = baseRotation2.getMatrix4() * world;
-
+		
 		shader.bind();
 		shader.setUniform3fv("camPos", 1, &(camera.getPosition())[0]);
-		shader.setUniformMatrix4fv("world", 1, false, &(world)[0][0]);
+		shader.setUniformMatrix4fv("matrix", 1, false, &(world)[0][0]);
 		shader.setUniformMatrix4fv("vp", 1, false, &(camera.getVP())[0][0]);
 		renderer.render(sphere);
 
@@ -119,10 +122,10 @@ void s3de::IGame::loop()
 		sm::Mat4 w = baseRotation.getMatrix4();
 		shader.bind();
 		shader.setUniform3fv("camPos", 1, &(camera.getPosition())[0]);
-		shader.setUniformMatrix4fv("world", 1, false, &(w)[0][0]);
+		shader.setUniformMatrix4fv("matrix", 1, false, &(w)[0][0]);
 		shader.setUniformMatrix4fv("vp", 1, false, &(camera.getVP())[0][0]);
 		renderer.render(barrel);
-
+		*/
 		// --------------- Display FPS --------------
 		if (fpsDisplayTimer >= 1.0)
 		{
@@ -134,6 +137,6 @@ void s3de::IGame::loop()
 		glfwSwapBuffers(display->getWindowPtr());
 		glfwPollEvents();
 	}
-	delete sphere;
-	delete barrel;
+	//delete sphere;
+	//delete barrel;
 }
