@@ -33,10 +33,10 @@ namespace s3de
 			std::cout << "Init RenderSystem " << std::endl;
 			renderer.resetMaterial(); // Use default material
 			this->shader = &renderer.getShader();
-			this->camera.create(sm::Vec3(0.0f, 0.0f, -1.0f), sm::Vec3(0.0f, 0.0f, 5.0f), (float)DEFAULT_WINDOW_WIDTH / (float)DEFAULT_WINDOW_HEIGHT);
+			//this->camera.create(sm::Vec3(0.0f, 0.0f, -1.0f), sm::Vec3(0.0f, 0.0f, 5.0f), (float)DEFAULT_WINDOW_WIDTH / (float)DEFAULT_WINDOW_HEIGHT);
 		}
 
-		void init(Entity* entity) override
+		void initEntity(Entity* entity) override
 		{
 		}
 
@@ -49,18 +49,14 @@ namespace s3de
 			{
 				sm::Mat4 matrix = transformComp->world * transformComp->model;
 
-				this->shader->bind();
-				this->shader->setUniform3fv("camPos", 1, &(this->camera.getPosition())[0]);
+				renderer.applyCamera();
 				this->shader->setUniformMatrix4fv("matrix", 1, false, &(matrix)[0][0]);
-				this->shader->setUniformMatrix4fv("vp", 1, false, &(this->camera.getVP())[0][0]);
 				renderer.render(renderableComp->model);
 			}
 		}
 
 	private:
 		s3de::Shader* shader;
-
-		s3de::FPSCamera camera;
 	};
 }
 

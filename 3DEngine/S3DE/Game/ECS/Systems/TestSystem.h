@@ -14,9 +14,14 @@ namespace s3de
 		TestSystem();
 		~TestSystem();
 
-		void init(Entity* entity) override
+		void init() override
 		{
 			std::cout << "Init TestStstem" << std::endl;
+		}
+
+		void initEntity(Entity* entity) override
+		{
+			
 		}
 
 		void update(float dt, Entity* entity) override

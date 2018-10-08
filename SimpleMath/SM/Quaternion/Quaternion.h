@@ -38,6 +38,7 @@ namespace sm
 		void setAngleAxis(float angle, const Vec3& axis);
 		void setYawPitchRoll(float pitch, float roll, float yaw);
 		void setRotation(const Vec3& from, const Vec3& to);
+		void setRotation(const Vec3& dir);
 
 		Vec3 rotate(const Vec3& v) const;
 		Vec3 operator*(const Vec3& v);

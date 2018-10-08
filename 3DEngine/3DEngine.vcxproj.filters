@@ -191,5 +191,8 @@
     <ClInclude Include="S3DE\Game\ECS\Components\TransformComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="S3DE\Game\ECS\Systems\CameraSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

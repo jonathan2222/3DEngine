@@ -16,7 +16,12 @@ namespace s3de
 	class HealthSystem : public ECSSystem<HealthComponent>
 	{
 	public:
-		void init(Entity* entity) override
+		void init() override
+		{
+
+		}
+
+		void initEntity(Entity* entity) override
 		{
 			HealthComponent* comp = entity->getComponent<HealthComponent>();
 			comp->health = rand() % 11 + 20;

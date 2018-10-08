@@ -85,6 +85,20 @@ void s3de::Renderer::resetMaterial()
 	this->ubo->setSubData(&defaultMaterial, sizeof(s3de::Material::MaterialData), 0);
 }
 
+void s3de::Renderer::setCamera(const sm::Mat4 & vp, const sm::Vec3 & pos)
+{
+	this->vp = vp;
+	this->camPos = pos;
+}
+
+void s3de::Renderer::applyCamera(Shader* shader) const
+{
+	Shader* localShader = shader;
+	if (localShader == nullptr) localShader = this->shader;
+	localShader->setUniform3fv("camPos", 1, &(this->camPos)[0]);
+	localShader->setUniformMatrix4fv("vp", 1, false, &(this->vp)[0][0]);
+}
+
 s3de::Shader & s3de::Renderer::getShader()
 {
 	return *this->shader;

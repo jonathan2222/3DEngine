@@ -60,19 +60,22 @@ void s3de::Ecs::removeEntity(s3de::Entity* entity)
 
 void s3de::Ecs::initSystems(Renderer & renderer)
 {
+	for (unsigned int j = 0; j < this->systems.size(); j++)
+		this->systems[j]->init();
+
+	for (unsigned int j = 0; j < this->renSystems.size(); j++)
+		this->renSystems[j]->initRender(renderer);
+
 	for (unsigned int i = 0; i < this->entities.size(); i++)
 	{
 		for (unsigned int j = 0; j < this->systems.size(); j++)
 			if (this->systems[j]->hasComponents(this->entities[i]->componentBitset))
-				this->systems[j]->init(this->entities[i]);
+				this->systems[j]->initEntity(this->entities[i]);
 
 		for (unsigned int j = 0; j < this->renSystems.size(); j++)
 			if (this->renSystems[j]->hasComponents(this->entities[i]->componentBitset))
-				this->renSystems[j]->init(this->entities[i]);
+				this->renSystems[j]->initEntity(this->entities[i]);
 	}
-
-	for (unsigned int j = 0; j < this->renSystems.size(); j++)
-			this->renSystems[j]->initRender(renderer);
 }
 
 void s3de::Ecs::updateSystems(Renderer & renderer, float dt)

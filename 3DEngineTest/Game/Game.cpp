@@ -9,6 +9,7 @@
 #include <time.h>
 
 #include "S3DE\Game\ECS\Systems\RenderSystem.h"
+#include "S3DE\Game\ECS\Systems\CameraSystem.h"
 #include "S3DE\Utils\ModelLoader.h"
 #include "S3DE\Utils\ModelGenerator.h"
 #include "SM\MathsTransform.h"
@@ -33,6 +34,13 @@ void Game::OnInitiate()
 	//this->model = s3de::ModelLoader::loadModel("./../3DEngine/S3DE/Resources/Models/Barrel.fbx");
 
 	// ------------------ ADD ENTITIES -----------------
+	s3de::CameraComponent camComp;
+	camComp.position = sm::Vec3(0.0f, 0.0f, 5.0f);
+	camComp.rotation.setRotation(sm::Vec3(0.0f, 0.0f, -1.0f));
+	s3de::Entity* player = this->ecs->makeEntity<s3de::CameraComponent>(camComp);
+	s3de::CameraComponent* cam = player->getComponent<s3de::CameraComponent>();
+	renderer.setCamera(cam->rotation.getMatrix4(), cam->position); // TODO: Get right vp => Add projection.
+
 	s3de::Entity* entity = this->ecs->makeEntity<s3de::PositionComponent, s3de::BoolComponent>();
 	s3de::Entity* entity2 = this->ecs->makeEntity<s3de::BoolComponent>();
 	s3de::Entity* entity3 = this->ecs->makeEntity<s3de::PositionComponent>();

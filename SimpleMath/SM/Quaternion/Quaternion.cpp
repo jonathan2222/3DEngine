@@ -91,6 +91,11 @@ void sm::Quaternion::setRotation(const Vec3 & from, const Vec3 & to)
 	}
 }
 
+void sm::Quaternion::setRotation(const Vec3 & dir)
+{
+	setRotation(Vec3(1.0f, 0.0f, 0.0f), dir);
+}
+
 sm::Vec3 sm::Quaternion::rotate(const Vec3 & v) const
 {
 	return this->matrix*v;
