@@ -18,13 +18,12 @@ namespace s3de
 		virtual void OnInitiate() {}
 		virtual void OnFrameUpdate(float dt) {}
 
-	protected:
-		Ecs* ecs;
-
 	private:
 		void init();
 		void loop();
 
+	protected:
+		Ecs* ecs;
 		Display * display;
 	};
 }

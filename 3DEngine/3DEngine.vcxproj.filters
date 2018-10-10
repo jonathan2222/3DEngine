@@ -72,9 +72,6 @@
     <ClCompile Include="S3DE\Game\ECS\Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="S3DE\Game\ECS\Systems\TestSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="S3DE\Graphics\GUI\Display.h">

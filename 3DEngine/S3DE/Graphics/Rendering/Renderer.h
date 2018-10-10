@@ -28,14 +28,14 @@ namespace s3de
 
 		void resetMaterial();
 
-		void setCamera(const sm::Mat4& vp, const sm::Vec3& pos);
+		void setCamera(sm::Mat4* vp, sm::Vec3* pos);
 		void applyCamera(Shader* shader = nullptr) const;
 
 		Shader& getShader();
 
 	private:
-		sm::Mat4 vp;
-		sm::Vec3 camPos;
+		sm::Mat4* vp;
+		sm::Vec3* camPos;
 		Shader* shader;
 		UniformBuffer* ubo;
 		bool isWireframeOn;

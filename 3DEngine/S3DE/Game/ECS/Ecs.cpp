@@ -22,7 +22,7 @@ s3de::Ecs::~Ecs()
 		delete this->entities[i];
 
 	for (unsigned int i = 0; i < this->systems.size(); i++)
-		delete this->systems[i];
+		delete this->systems[i].first;
 
 	for (unsigned int i = 0; i < this->renSystems.size(); i++)
 		delete this->renSystems[i];
@@ -61,7 +61,7 @@ void s3de::Ecs::removeEntity(s3de::Entity* entity)
 void s3de::Ecs::initSystems(Renderer & renderer)
 {
 	for (unsigned int j = 0; j < this->systems.size(); j++)
-		this->systems[j]->init();
+		this->systems[j].first->init(this->systems[j].second);
 
 	for (unsigned int j = 0; j < this->renSystems.size(); j++)
 		this->renSystems[j]->initRender(renderer);
@@ -69,8 +69,8 @@ void s3de::Ecs::initSystems(Renderer & renderer)
 	for (unsigned int i = 0; i < this->entities.size(); i++)
 	{
 		for (unsigned int j = 0; j < this->systems.size(); j++)
-			if (this->systems[j]->hasComponents(this->entities[i]->componentBitset))
-				this->systems[j]->initEntity(this->entities[i]);
+			if (this->systems[j].first->hasComponents(this->entities[i]->componentBitset))
+				this->systems[j].first->initEntity(this->entities[i]);
 
 		for (unsigned int j = 0; j < this->renSystems.size(); j++)
 			if (this->renSystems[j]->hasComponents(this->entities[i]->componentBitset))
@@ -86,8 +86,8 @@ void s3de::Ecs::updateSystems(Renderer & renderer, float dt)
 		bool removeFlagHasSet = false;
 		for (unsigned int j = 0; j < this->systems.size(); j++)
 		{
-			if (this->systems[j]->hasComponents(this->entities[i]->componentBitset))
-				this->systems[j]->update(dt, this->entities[i]);
+			if (this->systems[j].first->hasComponents(this->entities[i]->componentBitset))
+				this->systems[j].first->update(dt, this->entities[i]);
 
 			if (!removeFlagHasSet && Utils::isBitSet<unsigned int>(this->entities[i]->flags, ENTITY_REMOVE_BIT))
 			{
@@ -105,19 +105,19 @@ void s3de::Ecs::updateSystems(Renderer & renderer, float dt)
 		removeEntity(entitiesToRemove[i]);
 }
 
-bool s3de::Ecs::addSystem(ECSISystem * system)
+bool s3de::Ecs::addSystem(ECSISystem * system, void* data)
 {
 	system->setEcsPtr(this);
-	this->systems.push_back(system);
+	this->systems.push_back(std::pair<ECSISystem*, void*>(system, data));
 	return true;
 }
 
 bool s3de::Ecs::removeSystem(ECSISystem * system)
 {
 	for(unsigned int i = 0; i < this->systems.size(); i++)
-		if (this->systems[i] == system)
+		if (this->systems[i].first == system)
 		{
-			delete this->systems[i];
+			delete this->systems[i].first;
 			this->systems[i] = this->systems[this->systems.size() - 1];
 			this->systems.pop_back();
 			return true;

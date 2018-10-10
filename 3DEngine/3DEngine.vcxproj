@@ -127,7 +127,6 @@
     <ClCompile Include="S3DE\Game\ECS\Component.cpp" />
     <ClCompile Include="S3DE\Game\ECS\Ecs.cpp" />
     <ClCompile Include="S3DE\Game\ECS\Entity.cpp" />
-    <ClCompile Include="S3DE\Game\ECS\Systems\TestSystem.cpp" />
     <ClCompile Include="S3DE\Game\IGame.cpp" />
     <ClCompile Include="S3DE\Graphics\GUI\Display.cpp" />
     <ClCompile Include="S3DE\Graphics\Objects\Mesh.cpp" />

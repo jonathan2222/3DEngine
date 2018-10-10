@@ -30,7 +30,7 @@ namespace s3de
 		void initSystems(Renderer & renderer);
 		void updateSystems(Renderer & renderer, float dt);
 
-		bool addSystem(ECSISystem* system);
+		bool addSystem(ECSISystem* system, void* data = nullptr);
 		bool removeSystem(ECSISystem* system);
 
 		bool addRenderSystem(ECSIRenderSystem* system);
@@ -39,7 +39,7 @@ namespace s3de
 	private:
 		std::map<ComponentID, std::vector<Byte>> componentsMemory;
 		std::vector<Entity*> entities;
-		std::vector<ECSISystem*> systems;
+		std::vector<std::pair<ECSISystem*, void*>> systems;
 		std::vector<ECSIRenderSystem*> renSystems;
 	};
 

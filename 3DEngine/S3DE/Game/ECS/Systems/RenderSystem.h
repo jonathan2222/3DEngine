@@ -42,6 +42,7 @@ namespace s3de
 
 		void render(Renderer& renderer, Entity* entity) override
 		{
+			renderer.applyCamera();
 			RenderableComponent* renderableComp = entity->getComponent<RenderableComponent>();
 			TransformComponent* transformComp = entity->getComponent<TransformComponent>();
 

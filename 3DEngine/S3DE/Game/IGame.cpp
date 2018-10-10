@@ -51,7 +51,7 @@ void s3de::IGame::init()
 
 void s3de::IGame::loop()
 {
-	s3de::FPSCamera camera(sm::Vec3(0.0f, 0.0f, -1.0f), sm::Vec3(0.0f, 0.0f, 5.0f), display->getAspectRatio());
+	//s3de::FPSCamera camera(sm::Vec3(0.0f, 0.0f, -1.0f), sm::Vec3(0.0f, 0.0f, 5.0f), display->getAspectRatio());
 	glfwSetCursorPos(display->getWindowPtr(), display->getWidth() / 2, display->getHeight() / 2);
 
 	sm::Mat4 world = sm::MathsTransform::translate(0.0f, 0.5f, -2.0f);

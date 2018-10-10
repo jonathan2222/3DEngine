@@ -11,10 +11,7 @@ namespace s3de
 	class TestSystem : public ECSSystem<PositionComponent, BoolComponent>
 	{
 	public:
-		TestSystem();
-		~TestSystem();
-
-		void init() override
+		void init(void* data) override
 		{
 			std::cout << "Init TestStstem" << std::endl;
 		}

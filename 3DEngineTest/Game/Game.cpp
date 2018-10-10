@@ -36,10 +36,13 @@ void Game::OnInitiate()
 	// ------------------ ADD ENTITIES -----------------
 	s3de::CameraComponent camComp;
 	camComp.position = sm::Vec3(0.0f, 0.0f, 5.0f);
-	camComp.rotation.setRotation(sm::Vec3(0.0f, 0.0f, -1.0f));
+	camComp.direction = sm::Vec3(0.0f, 0.0f, -1.0f);
+	camComp.fov = sm::MathsConstatns::PI / 4.f;
+	camComp.zNear = 0.1f;
+	camComp.zFar = 100.f;
 	s3de::Entity* player = this->ecs->makeEntity<s3de::CameraComponent>(camComp);
 	s3de::CameraComponent* cam = player->getComponent<s3de::CameraComponent>();
-	renderer.setCamera(cam->rotation.getMatrix4(), cam->position); // TODO: Get right vp => Add projection.
+	renderer.setCamera(&cam->matrix, &cam->position);
 
 	s3de::Entity* entity = this->ecs->makeEntity<s3de::PositionComponent, s3de::BoolComponent>();
 	s3de::Entity* entity2 = this->ecs->makeEntity<s3de::BoolComponent>();
@@ -71,6 +74,7 @@ void Game::OnInitiate()
 	entity->getComponent<s3de::BoolComponent>()->b = false;
 
 	// ------------------ ADD SYSTEMS ------------------
+	this->ecs->addSystem(new s3de::CameraSystem(), this->display);
 	this->ecs->addSystem(new s3de::TestSystem());
 	this->ecs->addSystem(new s3de::HealthSystem());
 	this->ecs->addRenderSystem(new s3de::RenderSystem());

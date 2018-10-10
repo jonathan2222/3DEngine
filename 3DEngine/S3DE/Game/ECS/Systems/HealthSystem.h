@@ -16,7 +16,7 @@ namespace s3de
 	class HealthSystem : public ECSSystem<HealthComponent>
 	{
 	public:
-		void init() override
+		void init(void* data) override
 		{
 
 		}

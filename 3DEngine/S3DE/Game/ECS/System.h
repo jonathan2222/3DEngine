@@ -17,7 +17,7 @@ namespace s3de
 		ECSISystem() {}
 		virtual ~ECSISystem() {}
 
-		virtual void init() = 0;
+		virtual void init(void* data) = 0;
 		virtual void initEntity(Entity* entity) = 0;
 		virtual void update(float dt, Entity* entity) = 0;
 		
