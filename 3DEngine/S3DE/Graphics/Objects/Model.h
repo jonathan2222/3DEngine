@@ -15,7 +15,7 @@ namespace s3de
 		~Model();
 
 		const std::vector<Mesh*>& getMeshes() const;
-		const std::vector<Material::MaterialData>& getMaterials() const;
+		std::vector<Material::MaterialData>& getMaterials();
 
 		bool hasMaterial() const;
 

@@ -22,12 +22,12 @@ namespace s3de
 
 		void setWireframe(bool on);
 
-		void render(const Model* model);
-		void render(const Model* model, const Material::MaterialData& material);
-		void render(const std::vector<Mesh*>& meshes, const Material::MaterialData& material) const;
-		void render(const std::vector<Mesh*>& meshes, const std::vector<Material::MaterialData>& materials) const;
+		void render(Model* model);
+		void render(const Model* model, Material::MaterialData& material);
+		void render(const std::vector<Mesh*>& meshes, Material::MaterialData& material) const;
+		void render(const std::vector<Mesh*>& meshes, std::vector<Material::MaterialData>& materials) const;
 
-		void resetMaterial();
+		void resetMaterial() const;
 
 		void setCamera(Camera* camera);
 		void setCamera(sm::Mat4* vp, sm::Vec3* pos);

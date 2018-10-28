@@ -33,17 +33,17 @@ void s3de::Renderer::setWireframe(bool on)
 	}
 }
 
-void s3de::Renderer::render(const Model * model)
+void s3de::Renderer::render(Model * model)
 {
 	render(model->getMeshes(), model->getMaterials());
 }
 
-void s3de::Renderer::render(const Model * model, const Material::MaterialData & material)
+void s3de::Renderer::render(const Model * model, Material::MaterialData & material)
 {
 	render(model->getMeshes(), material);
 }
 
-void s3de::Renderer::render(const std::vector<Mesh*>& meshes, const Material::MaterialData & material) const
+void s3de::Renderer::render(const std::vector<Mesh*>& meshes, Material::MaterialData & material) const
 {
 	unsigned int materialIndex = 0;
 	shader->bind();
@@ -62,7 +62,7 @@ void s3de::Renderer::render(const std::vector<Mesh*>& meshes, const Material::Ma
 	}
 }
 
-void s3de::Renderer::render(const std::vector<Mesh*>& meshes, const std::vector<Material::MaterialData>& materials) const
+void s3de::Renderer::render(const std::vector<Mesh*>& meshes, std::vector<Material::MaterialData>& materials) const
 {
 	unsigned int materialIndex = 0;
 	shader->bind();
@@ -73,8 +73,10 @@ void s3de::Renderer::render(const std::vector<Mesh*>& meshes, const std::vector<
 
 	for (s3de::Mesh* m : meshes)
 	{
-		if(!materials.empty())
+		if (!materials.empty())
 			ubo->setSubData(&(materials[materialIndex]), sizeof(s3de::Material::MaterialData), 0);
+		else
+			resetMaterial();
 		m->getVertexBuffer().bind();
 		m->getIndexBuffer().bind();
 		glDrawElements(GL_TRIANGLES, m->getIndexBuffer().getCount(), GL_UNSIGNED_INT, nullptr);
@@ -82,7 +84,7 @@ void s3de::Renderer::render(const std::vector<Mesh*>& meshes, const std::vector<
 	}
 }
 
-void s3de::Renderer::resetMaterial()
+void s3de::Renderer::resetMaterial() const
 {
 	Material::MaterialData defaultMaterial = { { 0.1f, 0.1f, 0.1f, 1.0f },{ 0.5f, 0.5f, 0.5f, 1.0f },{ 1.0f, 0.0f, 0.0f, 90.0f } };
 	this->ubo->setSubData(&defaultMaterial, sizeof(s3de::Material::MaterialData), 0);

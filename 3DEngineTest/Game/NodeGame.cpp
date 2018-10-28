@@ -74,6 +74,15 @@ void NodeGame::OnInitiate()
 	object->addChild(modelNode);
 	// ----------------------------------------------------------------------
 
+	s3de::Node* axis = new s3de::Node("Axis[%id]");
+	this->root->addChild(axis);
+	s3de::ModelNode* axisModel = new s3de::ModelNode("./../3DEngine/S3DE/Resources/Models/3DAxis.fbx");
+	axisModel->getModel()->getMaterials()[0].ambientColor = sm::Vec4(0.2f);
+	axisModel->getModel()->getMaterials()[0].diffuseColor = sm::Vec4(0.25f);
+	axisModel->getModel()->getMaterials()[0].specularColor = sm::Vec4(0.2f);
+	axisModel->getTransform().setPosition({ 0.0f, 0.0f, 0.0f });
+	axis->addChild(axisModel);
+
 	// ------------------------------- PLAYER -------------------------------
 	this->player = new s3de::Node("Player[%id]");
 	this->camera = new s3de::FPSCamera(sm::Vec3(0.0f, 0.0f, -1.0f), sm::Vec3(0.0f, 5.0f, 30.0f), display->getAspectRatio());

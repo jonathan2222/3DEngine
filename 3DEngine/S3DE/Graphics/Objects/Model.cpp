@@ -25,7 +25,7 @@ const std::vector<s3de::Mesh*>& s3de::Model::getMeshes() const
 	return this->meshes;
 }
 
-const std::vector<s3de::Material::MaterialData>& s3de::Model::getMaterials() const
+std::vector<s3de::Material::MaterialData>& s3de::Model::getMaterials()
 {
 	return this->materials;
 }
