@@ -8,6 +8,9 @@
 #include "SM/MathsTransform.h"
 #include "SM/Quaternion/Quaternion.h"
 
+#include "../../../Input/InputManager.h"
+#include "../../../Input/InputConfig.h"
+
 #include <iostream>
 
 namespace s3de
@@ -31,6 +34,9 @@ namespace s3de
 		{
 			this->display = (Display*)data;
 			std::cout << "Init CameraSystem " << std::endl;
+
+			this->preMousePos.x - 1.f;
+			this->preMousePos.y - 1.f;
 		}
 
 		void initEntity(Entity* entity) override
@@ -44,12 +50,50 @@ namespace s3de
 
 		void update(float dt, Entity* entity) override
 		{
-			//CameraComponent* cameraComp = entity->getComponent<CameraComponent>();
+			/*
+			CameraComponent* cameraComp = entity->getComponent<CameraComponent>();
+			sm::Vec2 mousePos = InputManager::getMousePosition(display->getWindowPtr());
+			mousePos.x /= (float)display->getWidth();
+			mousePos.y /= display->getHeight();
 
+			float stepX = (float)display->getWidth() / CAMERA_WIDTH;
+			float stepY = display->getAspectRatio();
+			float cameraHeight = stepY * CAMERA_WIDTH;
+
+			if (s3de::InputManager::press(display->getWindowPtr(), GLFW_KEY_W))
+				setPosition(cameraComp->position + (FPS_CAMERA_SPEED * dt) * cameraComp->direction);
+			if (s3de::InputManager::press(display->getWindowPtr(), GLFW_KEY_S))
+				setPosition(cameraComp->position - (FPS_CAMERA_SPEED * dt) * cameraComp->direction);
+			if (s3de::InputManager::press(display->getWindowPtr(), GLFW_KEY_D))
+				setPosition(cameraComp->position + (FPS_CAMERA_SPEED * dt) * getRight());
+			if (s3de::InputManager::press(display->getWindowPtr(), GLFW_KEY_A))
+				setPosition(cameraComp->position - (FPS_CAMERA_SPEED * dt) * getRight());
+
+			if (s3de::InputManager::toggle(display->getWindowPtr(), GLFW_KEY_C))
+			{
+				// Mouse position has changed!
+				if (this->preMousePos != mousePos)
+				{
+					sm::Vec3 dir = cameraComp->direction;
+
+					sm::Vec2 deltaPos = sm::Vec2(0.5f, 0.5f) - mousePos;
+					dir = sm::MathsTransform::rotate(dir, MOUSE_SENSITIVITY_X * deltaPos.x * stepX * dt, getUp());
+					dir = sm::MathsTransform::rotate(dir, MOUSE_SENSITIVITY_Y * deltaPos.y * stepY * dt, getRight());
+					lookIn(dir, *cameraComp);
+				}
+			}
+
+			this->preMousePos = mousePos;*/
 		}
 
 	private:
+		void lookIn(const sm::Vec3 & direction, CameraComponent& comp)
+		{
+			sm::MathsTransform::initCamera(comp.view, direction, sm::Vec3(0.0f, 1.0f, 0.0f), comp.position);
+		}
+
 		Display* display;
+		sm::Vec2 preMousePos;
 	};
 }
 

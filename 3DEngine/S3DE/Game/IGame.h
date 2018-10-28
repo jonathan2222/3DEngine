@@ -3,6 +3,7 @@
 
 #include "../Graphics/GUI/Display.h"
 #include "ECS\Ecs.h"
+#include "Node/Node.h"
 
 namespace s3de
 {
@@ -24,6 +25,7 @@ namespace s3de
 
 	protected:
 		Ecs* ecs;
+		Node* root;
 		Display * display;
 	};
 }

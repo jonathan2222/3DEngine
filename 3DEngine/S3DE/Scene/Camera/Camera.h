@@ -1,14 +1,17 @@
 #ifndef S3DE_CAMERA_H
 #define S3DE_CAMERA_H
 
-#include "GLFW\glfw3.h"
 
 #include "SM/Vectors/Vec3.h"
 #include "SM/Matrices/Mat4.h"
 
+#include "../../Game/Node/Node.h"
+
+#include "GLFW\glfw3.h"
+
 namespace s3de
 {
-	class Camera
+	class Camera : public Node
 	{
 	public:
 		Camera();

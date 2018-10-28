@@ -17,7 +17,7 @@ uniform vec3 emissionColor;
 out vec4 finalColor;
 
 const vec3 lightPos = vec3(0.0, 5.0, 1.0);
-const float intensity = 1.0;
+const float intensity = 10.0;
 
 const float epsilon = 0.0001;
 

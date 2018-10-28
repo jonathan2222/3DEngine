@@ -1,7 +1,10 @@
 #include "Renderer.h"
 
+#include "../../Scene/Camera/Camera.h"
+
 s3de::Renderer::Renderer()
 {
+	this->camera = nullptr;
 	this->shader = new Shader("./../3DEngine/S3DE/Resources/Shaders/testShader");
 	this->shader->bind();
 	this->ubo = new UniformBuffer("Material", shader->getID(), 1);
@@ -85,6 +88,11 @@ void s3de::Renderer::resetMaterial()
 	this->ubo->setSubData(&defaultMaterial, sizeof(s3de::Material::MaterialData), 0);
 }
 
+void s3de::Renderer::setCamera(Camera * camera)
+{
+	this->camera = camera;
+}
+
 void s3de::Renderer::setCamera(sm::Mat4* vp, sm::Vec3* pos)
 {
 	this->vp = vp;
@@ -95,8 +103,16 @@ void s3de::Renderer::applyCamera(Shader* shader) const
 {
 	Shader* localShader = shader;
 	if (localShader == nullptr) localShader = this->shader;
-	localShader->setUniform3fv("camPos", 1, &(*this->camPos)[0]);
-	localShader->setUniformMatrix4fv("vp", 1, false, &(*this->vp)[0][0]);
+	if (this->camera == nullptr)
+	{
+		localShader->setUniform3fv("camPos", 1, &(*this->camPos)[0]);
+		localShader->setUniformMatrix4fv("vp", 1, false, &(*this->vp)[0][0]);
+	}
+	else
+	{
+		localShader->setUniform3fv("camPos", 1, &(this->camera->getPosition())[0]);
+		localShader->setUniformMatrix4fv("vp", 1, false, &(this->camera->getVP())[0][0]);
+	}
 }
 
 s3de::Shader & s3de::Renderer::getShader()

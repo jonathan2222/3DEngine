@@ -35,6 +35,9 @@ namespace sm
 		static float length(const T& v);
 
 		template<typename T>
+		static float length2(const T& v);
+
+		template<typename T>
 		static bool isZeroLength(const T& v);
 
 		template<typename T>
@@ -79,10 +82,16 @@ namespace sm
 	template<typename T>
 	float Maths::length(const T & v)
 	{
+		return sqrt(length2<T>(v));
+	}
+
+	template<typename T>
+	float Maths::length2(const T & v)
+	{
 		float sum = 0.0f;
 		for (int i = 0; i < v.length(); i++)
 			sum += v[i] * v[i];
-		return sqrt(sum);
+		return sum;
 	}
 
 	template<typename T>

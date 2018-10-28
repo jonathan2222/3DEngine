@@ -3,22 +3,25 @@
 #include "CameraConfig.h"
 #include "SM/MathsTransform.h"
 
-s3de::Camera::Camera()
+s3de::Camera::Camera() : Node()
 {
 	this->fov = DEFAULT_FOV;
 	this->aspectRatio = 0.0f;
 	this->zNear = DEFAULT_ZNEAR;
 	this->zFar = DEFAULT_ZFAR;
 	this->position = sm::Vec3();
+	setName("Camera[%id]");
 }
 
-s3de::Camera::Camera(const sm::Vec3 & direction, float aspectRatio)
+s3de::Camera::Camera(const sm::Vec3 & direction, float aspectRatio) : Node()
 {
+	setName("Camera[%id]");
 	init(direction, sm::Vec3(), sm::Vec3(0.0f, 1.0f, 0.0f), DEFAULT_FOV, aspectRatio, DEFAULT_ZNEAR, DEFAULT_ZFAR);
 }
 
-s3de::Camera::Camera(const sm::Vec3 & direction, const sm::Vec3 & position, float aspectRatio)
+s3de::Camera::Camera(const sm::Vec3 & direction, const sm::Vec3 & position, float aspectRatio) : Node()
 {
+	setName("Camera[%id]");
 	init(direction, position, sm::Vec3(0.0f, 1.0f, 0.0f), DEFAULT_FOV, aspectRatio, DEFAULT_ZNEAR, DEFAULT_ZFAR);
 }
 

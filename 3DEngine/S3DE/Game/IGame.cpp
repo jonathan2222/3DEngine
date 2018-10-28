@@ -31,11 +31,13 @@ s3de::IGame::~IGame()
 {
 	delete this->display;
 	delete this->ecs;
+	delete this->root;
 }
 
 void s3de::IGame::run()
 {
 	this->OnInitiate();
+	this->root->init();
 	loop();
 }
 
@@ -47,6 +49,7 @@ void s3de::IGame::init()
 	glCullFace(GL_BACK);
 
 	this->ecs = new Ecs();
+	this->root = new Node();
 }
 
 void s3de::IGame::loop()
@@ -93,7 +96,9 @@ void s3de::IGame::loop()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// ----------------- Update -----------------
-		this->OnFrameUpdate(timer.getDeltaTime());
+		float dt = timer.getDeltaTime();
+		this->root->update(dt);
+		this->OnFrameUpdate(dt);
 		/*
 		// ----------------- Render -----------------
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

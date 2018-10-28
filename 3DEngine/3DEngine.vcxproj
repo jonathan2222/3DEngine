@@ -128,6 +128,8 @@
     <ClCompile Include="S3DE\Game\ECS\Ecs.cpp" />
     <ClCompile Include="S3DE\Game\ECS\Entity.cpp" />
     <ClCompile Include="S3DE\Game\IGame.cpp" />
+    <ClCompile Include="S3DE\Game\Node\Node.cpp" />
+    <ClCompile Include="S3DE\Game\Node\Nodes\ModelNode.cpp" />
     <ClCompile Include="S3DE\Graphics\GUI\Display.cpp" />
     <ClCompile Include="S3DE\Graphics\Objects\Mesh.cpp" />
     <ClCompile Include="S3DE\Graphics\Objects\Model.cpp" />
@@ -138,6 +140,7 @@
     <ClCompile Include="S3DE\OpenGLAbstractions\UniformBuffer.cpp" />
     <ClCompile Include="S3DE\OpenGLAbstractions\VertexArray.cpp" />
     <ClCompile Include="S3DE\OpenGLAbstractions\VertexBuffer.cpp" />
+    <ClCompile Include="S3DE\Physics\Physics.cpp" />
     <ClCompile Include="S3DE\Scene\Camera\Camera.cpp" />
     <ClCompile Include="S3DE\Scene\Camera\FPSCamera.cpp" />
     <ClCompile Include="S3DE\Utils\Error.cpp" />
@@ -163,6 +166,8 @@
     <ClInclude Include="S3DE\Game\ECS\Systems\HealthSystem.h" />
     <ClInclude Include="S3DE\Game\ECS\Systems\TestSystem.h" />
     <ClInclude Include="S3DE\Game\IGame.h" />
+    <ClInclude Include="S3DE\Game\Node\Node.h" />
+    <ClInclude Include="S3DE\Game\Node\Nodes\ModelNode.h" />
     <ClInclude Include="S3DE\Graphics\GUI\Display.h" />
     <ClInclude Include="S3DE\Graphics\GUI\WindowConfig.h" />
     <ClInclude Include="S3DE\Graphics\Objects\Material.h" />
@@ -180,6 +185,8 @@
     <ClInclude Include="S3DE\OpenGLAbstractions\VertexArray.h" />
     <ClInclude Include="S3DE\OpenGLAbstractions\VertexBuffer.h" />
     <ClInclude Include="S3DE\OpenGLAbstractions\VertexBufferLayout.h" />
+    <ClInclude Include="S3DE\Physics\Physics.h" />
+    <ClInclude Include="S3DE\Physics\Projectile.h" />
     <ClInclude Include="S3DE\Scene\Camera\Camera.h" />
     <ClInclude Include="S3DE\Scene\Camera\CameraConfig.h" />
     <ClInclude Include="S3DE\Scene\Camera\FPSCamera.h" />
@@ -188,6 +195,7 @@
     <ClInclude Include="S3DE\Utils\ModelGenerator.h" />
     <ClInclude Include="S3DE\Utils\ModelLoader.h" />
     <ClInclude Include="S3DE\Utils\Timer.h" />
+    <ClInclude Include="S3DE\Utils\Transform.h" />
     <ClInclude Include="S3DE\Utils\Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

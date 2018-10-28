@@ -72,6 +72,15 @@
     <ClCompile Include="S3DE\Game\ECS\Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="S3DE\Game\Node\Node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="S3DE\Game\Node\Nodes\ModelNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="S3DE\Physics\Physics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="S3DE\Graphics\GUI\Display.h">
@@ -189,6 +198,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="S3DE\Game\ECS\Systems\CameraSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="S3DE\Game\Node\Node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="S3DE\Game\Node\Nodes\ModelNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="S3DE\Utils\Transform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="S3DE\Physics\Physics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="S3DE\Physics\Projectile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

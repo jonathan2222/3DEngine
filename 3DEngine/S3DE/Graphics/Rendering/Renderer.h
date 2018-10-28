@@ -13,6 +13,7 @@ namespace s3de
 	/*
 		Can only be one instance of this class or else it wont work!!
 	*/
+	class Camera;
 	class Renderer
 	{
 	public:
@@ -28,12 +29,14 @@ namespace s3de
 
 		void resetMaterial();
 
+		void setCamera(Camera* camera);
 		void setCamera(sm::Mat4* vp, sm::Vec3* pos);
 		void applyCamera(Shader* shader = nullptr) const;
 
 		Shader& getShader();
 
 	private:
+		Camera* camera;
 		sm::Mat4* vp;
 		sm::Vec3* camPos;
 		Shader* shader;

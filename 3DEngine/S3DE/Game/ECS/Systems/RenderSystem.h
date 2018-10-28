@@ -33,7 +33,6 @@ namespace s3de
 			std::cout << "Init RenderSystem " << std::endl;
 			renderer.resetMaterial(); // Use default material
 			this->shader = &renderer.getShader();
-			//this->camera.create(sm::Vec3(0.0f, 0.0f, -1.0f), sm::Vec3(0.0f, 0.0f, 5.0f), (float)DEFAULT_WINDOW_WIDTH / (float)DEFAULT_WINDOW_HEIGHT);
 		}
 
 		void initEntity(Entity* entity) override
@@ -42,7 +41,6 @@ namespace s3de
 
 		void render(Renderer& renderer, Entity* entity) override
 		{
-			renderer.applyCamera();
 			RenderableComponent* renderableComp = entity->getComponent<RenderableComponent>();
 			TransformComponent* transformComp = entity->getComponent<TransformComponent>();
 
